@@ -1,0 +1,6 @@
+CREATE SET 1a
+	SetIdLoad[]
+LOAD INTO 1a FILES 1.aon, 2.aon
+	ParaUse[],ParaUse[][],ParaUse[][][]
+USE SET 1a
+	SetIdUse[]

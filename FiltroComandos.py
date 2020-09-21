@@ -1,6 +1,6 @@
-import AutomataComas
+import AutomataComas#UNE UN COMANDO 1,2,3,4,5
 
-comandoPrin=('CREATE','LOAD','SELECCIONAR','USET','SELECT','LIST','PRINT','MAX','SUM',
+comandoPrin=('CREATE','LOAD','SELECCIONAR','USE','SELECT','LIST','PRINT','MAX','SUM',
                 'COUNT','REPORT','SCRIPT')
 comandoSeco=('SET','INTO','*','ATTRIBUTES','IN','TO','TOKENS')
 comandoTer=('WHERE')

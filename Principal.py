@@ -1,11 +1,13 @@
 import os
 import Comando
-import FiltroComandos
-
+import FiltroComandos#SEPARAR LOS COMANDOS LOAD INTO elementos FILES periodica.aon, periodica2.aon
+import UrlPath#OBTIENE URL DEVUELVE MATRIZ TEXO CADA cosa
 salir=True
 Url_Archivos=[]
 Elementos=[]
-SetId=[]
+SetIdLoad=[]
+SetIdUse=[]
+ParaUse=[]
 my_path = os.path.abspath(os.path.dirname(__file__))
 #
 Archivos=open(os.path.join(my_path, "../SimplqQL_XD/Comando.py"),"r")
@@ -25,20 +27,30 @@ while salir==True:
     matrizComandos=FiltroComandos.FiltroCom(comando)
     if matrizComandos[0]=='CREATE':
         if matrizComandos[1]=='SET':
-            SetId.append(matrizComandos[2])
+            SetIdLoad.append(matrizComandos[2])#crea:elmentos
             print()
-
+#---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
     elif matrizComandos[0]=='LOAD':
         if matrizComandos[1]=='INTO':
-            for id in SetId:
+            for id in SetIdLoad:
                 if id==matrizComandos[2]:#elementos
                     if matrizComandos[3]=='FILES':
-
-                        #.aon
+                        MatrizAon=UrlPath.GetUrl(matrizComandos[4])#RETORNA ARCHIVO PARA LEERLOS .READ()
+                        ParaUse.append([matrizComandos[2],MatrizAon])#CREA MATRIZ ||elementos||ARCHIVOS(1.aon,2.aon)||
+                        #print(ParaUse[0][0],ParaUse[0][1][0].read())#[0][1]
                         print()
-
+#---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
     elif matrizComandos[0]=='USE':
-        print()
+        #SetId.clear()#ELMINAR PARA NO CREAR CUNFUNCION
+        if matrizComandos[1]=='SET':
+            for id in range(len(ParaUse)):
+                if matrizComandos[2]==ParaUse[id][0]:
+                    SetIdUse.append(matrizComandos[2])
+                    print()
+#---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
     elif matrizComandos[0]=='SELECT':
         print()
     elif matrizComandos[0]=='LIST':
@@ -57,4 +69,4 @@ while salir==True:
         print()
 
 
-    print(SetId)
+    print(SetId, "id:elementos")
