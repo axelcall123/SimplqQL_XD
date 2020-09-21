@@ -1,3 +1,6 @@
+import Principal
+Principal
+
 def sepComas(matriz1):
         MatrizAyuda=[]
         unir_matriz='' #UNIR TODA LA MATRIZ

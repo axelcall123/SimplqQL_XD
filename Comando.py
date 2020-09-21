@@ -1,4 +1,4 @@
 
 #TODO: nel
 def hola():
-    print("hola mundos")
+    print("INSERTE LOS COMANDOS")

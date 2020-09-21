@@ -2,12 +2,13 @@ import os
 import Comando
 import FiltroComandos#SEPARAR LOS COMANDOS LOAD INTO elementos FILES periodica.aon, periodica2.aon
 import UrlPath#OBTIENE URL DEVUELVE MATRIZ TEXO CADA cosa
+import AutomataAon
 salir=True
 Url_Archivos=[]
-Elementos=[]
+#Elementos=[]
 SetIdLoad=[]
 SetIdUse=[]
-ParaUse=[]
+ParaUse=[]#PARA EL USO DE LOS DEMAS COMANDOS
 my_path = os.path.abspath(os.path.dirname(__file__))
 #
 Archivos=open(os.path.join(my_path, "../SimplqQL_XD/Comando.py"),"r")
@@ -39,6 +40,7 @@ while salir==True:
                         MatrizAon=UrlPath.GetUrl(matrizComandos[4])#RETORNA ARCHIVO PARA LEERLOS .READ()
                         ParaUse.append([matrizComandos[2],MatrizAon])#CREA MATRIZ ||elementos||ARCHIVOS(1.aon,2.aon)||
                         #print(ParaUse[0][0],ParaUse[0][1][0].read())#[0][1]
+                        #print(ParaUse[0][1]," [0][1]")
                         print()
 #---------------------------------------------------------------------------
 #---------------------------------------------------------------------------
@@ -46,13 +48,26 @@ while salir==True:
         #SetId.clear()#ELMINAR PARA NO CREAR CUNFUNCION
         if matrizComandos[1]=='SET':
             for id in range(len(ParaUse)):
-                if matrizComandos[2]==ParaUse[id][0]:
+                if matrizComandos[2]==ParaUse[id][0]:#OBTIENE ||elementos||
                     SetIdUse.append(matrizComandos[2])
+                    print(SetIdUse, "ID:USE")
                     print()
 #---------------------------------------------------------------------------
 #---------------------------------------------------------------------------
     elif matrizComandos[0]=='SELECT':
-        print()
+        #-----------------------#COMANDO: SELECT *--------------------
+        if matrizComandos[1]=='*':#COMANDO: SELECT *
+            if matrizComandos[2]==' ':#COMANDO: SELECT *
+                
+                for id in range(len(ParaUse)):
+                    if SetIdUse[0]==ParaUse[id][0]:#OBTIENE ||elementos||
+                        AutomataAon.automata(ParaUse[id][1])#OBTIENE || ||ARHCIVO||
+                        print()
+            else:#COMANDO: SELECT * .....
+                print()
+        #-----------------------#COMANDO: SELECT 1, 2--------------------
+        else:#COMANDO SELECT: 1, 2
+            print()
     elif matrizComandos[0]=='LIST':
         print()
     elif matrizComandos[0]=='PRINT':
@@ -69,4 +84,4 @@ while salir==True:
         print()
 
 
-    print(SetId, "id:elementos")
+    print(SetIdLoad, "id:elementos")
