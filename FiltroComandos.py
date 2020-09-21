@@ -7,7 +7,7 @@ comandoTer=('WHERE')
 comandoCuar=('FILES','COUNT','SUM','SELECT')
 comandoCin=('=','<','>','=<','=>','*')
 comandoCon=('AND','OR','XOR',)
-
+#
 def FiltroCom(comando):
     matrizComandos=[]
     #print('Utilice los comandos diponibles')
@@ -15,7 +15,7 @@ def FiltroCom(comando):
     sep_palabras_es= comando.split(seprador_espacio)#SEPARA COMANDO NOMBRE,HOLA,ET
     for id in range(10-len(sep_palabras_es)):
         sep_palabras_es.append(" ")
-    print(sep_palabras_es, "SIN POP")
+    #print(sep_palabras_es, "SIN POP")
 
     #FILTRAR COMANDOS 1
     for id in comandoPrin:
@@ -34,14 +34,14 @@ def FiltroCom(comando):
             matrizComandos.append(MatrizAyuda[0])
             for id in range(int(MatrizAyuda[1])):#QUITA LAS POSICIONES PARA QUE EL COMANDO QUEDE POS 3
                 sep_palabras_es.pop(0)
-            print(sep_palabras_es, "POP")
+            #print(sep_palabras_es, "POP")
             break
 
     
 
     for id in range(10-len(sep_palabras_es)):#EVITAR BUG matriz pequeña
         sep_palabras_es.append(" ")
-    print(sep_palabras_es, "AÑADIDO")
+    #print(sep_palabras_es, "AÑADIDO")
     #FILTRAR COMANDOS 3 TODO: eliminar condicion solo es texto
 
     matrizComandos.append(sep_palabras_es[2])
@@ -61,13 +61,13 @@ def FiltroCom(comando):
             matrizComandos.append(MatrizAyuda[0])
             for id in range(int(MatrizAyuda[1])):#QUITA LAS POSICIONES PARA QUE EL COMANDO QUEDE POS 3
                 sep_palabras_es.pop(0)
-            print(sep_palabras_es, "POP")
+            #print(sep_palabras_es, "POP")
             break
    
 
     for id in range(10-len(sep_palabras_es)):#EVITAR BUG matriz pequeña
         sep_palabras_es.append(" ")
-    print(sep_palabras_es, "AÑADIDO")
+    #print(sep_palabras_es, "AÑADIDO")
 
     #FILTRAR COMANDOS 6
     matrizComandos.append(sep_palabras_es[5])
@@ -91,4 +91,5 @@ def FiltroCom(comando):
     matrizComandos.append(sep_palabras_es[9])
 
     print(matrizComandos, "COMANDO EVALUAR")
-    # print(sep_palabras_es)
+    return matrizComandos
+    #print(sep_palabras_es)
