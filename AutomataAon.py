@@ -111,3 +111,4 @@ def SeparacionAutomata(Texto):
                     print("Error_Num:6",nueva_cadena[i],"pos",i)
                     return
         #----------------------BIENDO PALABRAS
+        
