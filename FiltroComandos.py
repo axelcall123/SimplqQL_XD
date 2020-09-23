@@ -39,15 +39,15 @@ def FiltroCom(comando):
 
     
 
-    for id in range(10-len(sep_palabras_es)):#EVITAR BUG matriz pequeña
+    for id in range(10-len(sep_palabras_es)):#EVITAR bug matriz pequeña
         sep_palabras_es.append(" ")
     #print(sep_palabras_es, "AÑADIDO")
-    #FILTRAR COMANDOS 3 TODO: eliminar condicion solo es texto
+    #FILTRAR COMANDOS 3 
 
     matrizComandos.append(sep_palabras_es[2])
 
     
-    #FILTRAR COMANDOS 4 TODO: eliminar condicion solo es texto
+    #FILTRAR COMANDOS 4 todo: eliminar condicion solo es texto
     matrizComandos.append(sep_palabras_es[3])
 
 
@@ -65,7 +65,7 @@ def FiltroCom(comando):
             break
    
 
-    for id in range(10-len(sep_palabras_es)):#EVITAR BUG matriz pequeña
+    for id in range(10-len(sep_palabras_es)):#EVITAR bug matriz pequeña
         sep_palabras_es.append(" ")
     #print(sep_palabras_es, "AÑADIDO")
 

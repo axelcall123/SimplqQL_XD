@@ -1,4 +1,4 @@
-#FILTRAR COMANDOS 3 TODO: eliminar condicion solo es texto
+#FILTRAR COMANDOS 3 todo: eliminar condicion solo es texto
     for id in comandoTer:
         if id==sep_palabras_es[2]:# IGUAL COMANDO POS 3
             matrizComandos.append(id)
@@ -8,7 +8,7 @@
             break
             print()
 
-            #FILTRAR COMANDOS 4 TODO: eliminar condicion solo es texto
+            #FILTRAR COMANDOS 4 todo: eliminar condicion solo es texto
                for id in comandoCuar:
                    if id==sep_palabras_es[3]:# IGUAL COMANDO POS 4
                        matrizComandos.append(id)
