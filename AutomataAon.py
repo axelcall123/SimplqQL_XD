@@ -5,25 +5,27 @@
 def automata(MatrizAon):#OBTENER 1.AON 2.AON LEIDO
     retorno=[]
     for id in range(len(MatrizAon)):
-        print(SeparacionAutomata(MatrizAon[id].read()),"c pillin")
-
+        SeparacionAutomata(MatrizAon[id].read())
+        
+        
 def SeparacionAutomata(nueva_cadena):
     state=0
     palabrad=''
+    AtriOp=[]
+    Atributo=''
     nueva_cadena=nueva_cadena+"@$#$@"
     for i in range(len(nueva_cadena)):
         if state==0:
              if nueva_cadena[i]=="(":
-                 print("|T_()Inicio|.0", nueva_cadena[i])
+                 #print("|T_()Inicio|.0", nueva_cadena[i])
                  state=1
-                 continue
              else:
                  print("Error:0",nueva_cadena[i],"pos",i)
                  return
         
         elif state==1:
            if nueva_cadena[i]=="\n":
-               print("/", nueva_cadena[i])
+               #print("/", nueva_cadena[i])
                state=2
            else:
                  print("Error:1",nueva_cadena[i],"pos",i)
@@ -31,14 +33,14 @@ def SeparacionAutomata(nueva_cadena):
         
         elif state==2:
             if nueva_cadena[i+1]==" ":
-                print("_", nueva_cadena[i])
+                #print("_", nueva_cadena[i])
                 state=2
             elif nueva_cadena[i+1]=="<":
                 state=3
             elif nueva_cadena[i+1]=="[":
                 state=4
             elif nueva_cadena[i]==" " and nueva_cadena[i+1]=="=":
-                print("_", nueva_cadena[i])
+                #print("_", nueva_cadena[i])
                 state=7
             else:
                 print("Error",nueva_cadena[i],"")
@@ -46,7 +48,7 @@ def SeparacionAutomata(nueva_cadena):
 
         elif state==3:
             if nueva_cadena[i]=="<":
-                print("|T_<>Inicio|.3",nueva_cadena[i],"")
+                #print("|T_<>Inicio|.3",nueva_cadena[i],"")
                 state=1
             else:
                 print("Error:3",nueva_cadena[i],"pos",i)
@@ -54,7 +56,8 @@ def SeparacionAutomata(nueva_cadena):
 
         elif state==4:
             if nueva_cadena[i]=="[":
-                print("|T_[]Inicio|.4",nueva_cadena[i],"")
+                print()
+                #print("|T_[]Inicio|.4",nueva_cadena[i],"")
             else:
                  if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BINEDO LETRAS
                     state=5
@@ -78,8 +81,9 @@ def SeparacionAutomata(nueva_cadena):
                 state=6
                 palabrad=palabrad+nueva_cadena[i]
             elif nueva_cadena[i]=="]":
-                print("|T_Atributo|.3",palabrad,"")
-                print("|T_[]Fin|.3",nueva_cadena[i],"")
+                #print("|T_Atributo|.3",palabrad,"")
+                Atributo=palabrad
+                #print("|T_[]Fin|.3",nueva_cadena[i],"")
                 palabrad=''
                 state=2
             else:
@@ -88,9 +92,9 @@ def SeparacionAutomata(nueva_cadena):
 
         elif state==7:
             if nueva_cadena[i]=='=':
-                print("|T_=|.4",nueva_cadena[i],"")
+                print()
+                #print("|T_=|.4",nueva_cadena[i],"")
             if nueva_cadena[i+1]==" ":
-                print("war")
                 if ord(nueva_cadena[i+2])>=48 and ord(nueva_cadena[i+2])<=57:
                     state=8
                 elif nueva_cadena[i+2]=="+" or nueva_cadena[i+2]=="-":
@@ -121,8 +125,9 @@ def SeparacionAutomata(nueva_cadena):
                 palabrad=palabrad+nueva_cadena[i]
             elif nueva_cadena[i]==",":
                 state=1
-                print("|T_Numero|.9",palabrad,"")
-                print("|T_Coma|.9",nueva_cadena[i],"")
+                #print("|T_Numero|.9",palabrad,"")
+                AtriOp.append([Atributo,palabrad])
+                #print("|T_Coma|.9",nueva_cadena[i],"")
                 palabrad=''
                 #NO TERMINADO LOL XD JAJAJAJAJAJAJ
             else:
@@ -135,8 +140,9 @@ def SeparacionAutomata(nueva_cadena):
                 palabrad=palabrad+nueva_cadena[i]
             elif nueva_cadena[i]==",":
                 state=1
-                print("|T_Numero|.10",palabrad,"")
-                print("|T_Coma|.10",nueva_cadena[i],"")
+                #print("|T_Numero|.10",palabrad,"")
+                AtriOp.append([Atributo,palabrad])
+                #print("|T_Coma|.10",nueva_cadena[i],"")
                 palabrad=''
 
         elif state==11:
@@ -144,7 +150,7 @@ def SeparacionAutomata(nueva_cadena):
             state=12
         
         elif state==12:
-            print('|T_""Inicio|.12',nueva_cadena[i],"")
+            #print('|T_""Inicio|.12',nueva_cadena[i],"")
             if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:
                 state=13
             else:
@@ -164,8 +170,9 @@ def SeparacionAutomata(nueva_cadena):
                 else:
                     print("Error:13.1",nueva_cadena[i],"pos",i)
             elif nueva_cadena[i]=='"':
-                print("|T_Palabra|.13",palabrad,"")
-                print('|T_""Final|.13',nueva_cadena[i],"")
+                #print("|T_Palabra|.13",palabrad,"")
+                AtriOp.append([Atributo,palabrad])
+                #print('|T_""Final|.13',nueva_cadena[i],"")
                 palabrad=''
                 state=15
             else:
@@ -180,8 +187,9 @@ def SeparacionAutomata(nueva_cadena):
                 state=14
                 palabrad=palabrad+nueva_cadena[i]
             elif nueva_cadena[i]=='"':
-                print("|T_Palabra|.13",palabrad,"")
-                print('|T_""Final|.13',nueva_cadena[i],"")
+                #print("|T_Palabra|.13",palabrad,"")
+                AtriOp.append([Atributo,palabrad])
+                #print('|T_""Final|.13',nueva_cadena[i],"")
                 palabrad=''
                 state=15
             else:
@@ -205,7 +213,8 @@ def SeparacionAutomata(nueva_cadena):
                 palabrad=palabrad+nueva_cadena[i]
             elif nueva_cadena[i]=='\n':
                 if palabrad=="false" or "true":
-                    print("|T_VF|.17",palabrad,"")
+                    #print("|T_VF|.17",palabrad,"")
+                    AtriOp.append([Atributo,palabrad])
                     print("/")
                     palabrad=''
                     state=18
@@ -214,7 +223,7 @@ def SeparacionAutomata(nueva_cadena):
 
         elif state==18:
             if nueva_cadena[i]=='>':
-                print("|T_<>Fin|.17",palabrad,"")
+                #print("|T_<>Fin|.17",palabrad,"")
                 if nueva_cadena[i+1]==",":
                     state=19
                 elif nueva_cadena[i+1]=="\n":
@@ -223,21 +232,21 @@ def SeparacionAutomata(nueva_cadena):
                      print("Error:18",nueva_cadena[i],"")
 
         elif state==19:
-            print("|T_coma|.19",nueva_cadena[i],"")
+            #print("|T_coma|.19",nueva_cadena[i],"")
             if nueva_cadena[i+1]==" ":
                 print("------------------NUEVO---------------------------")
                 state=2
 
         elif state==20:
-            print("/")
+            #print("/")
             state=21
 
         elif state==21:
             if nueva_cadena[i]==")":
-                 print("|T_()Fin|.11", nueva_cadena[i],"")
+                 #print("|T_()Fin|.11", nueva_cadena[i],"")
                  if nueva_cadena[i:len(nueva_cadena)]==")@$#$@":
                      print("Fin")
                      return
                  else:
                      print("Error:21",nueva_cadena[i],"")
-
+    return AtriOp

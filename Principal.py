@@ -47,7 +47,7 @@ while salir==True:
         if matrizComandos[1]=='SET':
             for id in range(len(ParaUse)):
                 if matrizComandos[2]==ParaUse[id][0]:#OBTIENE ||SET>>elementos||
-                    SetIdUse.append(matrizComandos[2])
+                    SetIdUse=matrizComandos[2]
                     print(SetIdUse, "ID:USE")
                     print()
 #---------------------------------------------------------------------------
@@ -57,7 +57,7 @@ while salir==True:
         if matrizComandos[1]=='*':#COMANDO: SELECT *
             if matrizComandos[2]==' ':#COMANDO: SELECT *
                 for id in range(len(ParaUse)):
-                    if SetIdUse[0]==ParaUse[id][0]:#OBTIENE ||SET>>elementoss||
+                    if SetIdUse==ParaUse[id][0]:#OBTIENE ||SET>>elementoss||
                         AutomataAon.automata(ParaUse[id][1])#OBTIENE || ||ARHCIVO||
                         break
             else:#COMANDO: SELECT * .....
