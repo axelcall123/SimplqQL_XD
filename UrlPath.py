@@ -1,7 +1,7 @@
 import os
 
-import Principal
-Principal
+#import Principal
+#Principal
 
 def GetUrl(TextoUrl):
     my_path = os.path.abspath(os.path.dirname(__file__))#URL DE CADA ARCHIVO

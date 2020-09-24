@@ -1,5 +1,5 @@
-import Principal
-Principal
+#import Principal
+#Principal
 
 def sepComas(matriz1):
         MatrizAyuda=[]
