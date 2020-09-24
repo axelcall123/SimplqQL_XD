@@ -5,7 +5,7 @@
         [atributo_booleano] = true
     >,
     <
-        [atributo_numerico] = 4,
+        [atributo_numerico] = 95.7,
         [atributo_cadena] = "nel xd",
         [atributo_booleano] = false
     >,

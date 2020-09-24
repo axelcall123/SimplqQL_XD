@@ -1,23 +1,23 @@
 #import Principal
 #Principal
-
+TokenObtenido=[]#LISTA QUE LLEVA |||NOMBRE TOKEN|| TOKEN||
 
 def automata(MatrizAon):#OBTENER 1.AON 2.AON LEIDO
-    retorno=[]
     for id in range(len(MatrizAon)):
-        print(SeparacionAutomata(MatrizAon[id].read()),"c pillin")
-
+        #print(type(MatrizAon[id].read())," wamos")
+        SeparacionAutomata(MatrizAon[id].read())
+        print(MatrizAon[id].read())
 def SeparacionAutomata(Texto):
-    TokenObtenido=[]#LISTA QUE LLEVA |||NOMBRE TOKEN|| TOKEN||
-    #print(Texto)
-    PalabraError=''
+    print(Texto)
     Texto=Texto+"@$#$@"
+    PalabraError=''
     #print(Texto)
     palabrad=''
     state=-1
     SinTabAEs=Texto.replace(" ","").split()#RENPLAZANDO ESPACIOS
     nueva_cadena="".join(SinTabAEs)#REMPLAZANDO TABS
     nueva_cadena=nueva_cadena.lower()#todo EN MINUSCULAS
+    print(nueva_cadena)
 
     for i in range(len(nueva_cadena)):
         print()
@@ -32,7 +32,6 @@ def SeparacionAutomata(Texto):
                 print("Error:-1",nueva_cadena[i],"pos",i)
                 TokenObtenido.append(["ERROR"])
                 return
-
         #----------------------BIENDO EL < < < < < < < < < < < < <
         elif state==0:
             print("posicion 0")
@@ -234,5 +233,4 @@ def SeparacionAutomata(Texto):
                     else:
                         print("Error")
                         TokenObtenido.append("ERROR")
-        #PalabraError=PalabraError+nueva_cadena[i]
-    return TokenObtenido
+        PalabraError=PalabraError+nueva_cadena[i]

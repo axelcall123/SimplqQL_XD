@@ -10,9 +10,20 @@ comandoCon=('AND','OR','XOR',)
 #
 def FiltroCom(comando):
     matrizComandos=[]
+    sep_palabras_es=[]
     #print('Utilice los comandos diponibles')
-    seprador_espacio=" "
-    sep_palabras_es= comando.split(seprador_espacio)#SEPARA COMANDO NOMBRE,HOLA,ET
+    #seprador_espacio=" "
+    #sep_palabras_es= comando.split(seprador_espacio)#SEPARA COMANDO NOMBRE,HOLA,ET
+    
+    unir=''#SUSTITUCION SPLIT
+    comando=comando+" :"#TOME LA ULTIMA POSICION
+    for id in range(len(comando)):
+        if comando[id]==' ':
+            sep_palabras_es.append(unir)
+            unir=''
+        else:
+            unir=unir+comando[id];
+            
     for id in range(10-len(sep_palabras_es)):
         sep_palabras_es.append(" ")
     #print(sep_palabras_es, "SIN POP")

@@ -1,8 +1,6 @@
-import os
-import Comando
+import Comando, AutomataAon, os
 import FiltroComandos#SEPARAR LOS COMANDOS LOAD INTO elementos FILES periodica.aon, periodica2.aon
 import UrlPath#OBTIENE URL DEVUELVE MATRIZ TEXO CADA cosa
-import AutomataAon
 salir=True
 Url_Archivos=[]
 #Elementos=[]
@@ -28,7 +26,7 @@ while salir==True:
     matrizComandos=FiltroComandos.FiltroCom(comando)
     if matrizComandos[0]=='CREATE':
         if matrizComandos[1]=='SET':
-            SetIdLoad.append(matrizComandos[2])#crea:elmentos
+            SetIdLoad.append(matrizComandos[2])#crea:SET>>elementos
             print()
 #---------------------------------------------------------------------------
 #---------------------------------------------------------------------------
@@ -48,7 +46,7 @@ while salir==True:
         #SetId.clear()#ELMINAR PARA NO CREAR CUNFUNCION
         if matrizComandos[1]=='SET':
             for id in range(len(ParaUse)):
-                if matrizComandos[2]==ParaUse[id][0]:#OBTIENE ||elementos||
+                if matrizComandos[2]==ParaUse[id][0]:#OBTIENE ||SET>>elementos||
                     SetIdUse.append(matrizComandos[2])
                     print(SetIdUse, "ID:USE")
                     print()
@@ -58,11 +56,10 @@ while salir==True:
         #-----------------------#COMANDO: SELECT *--------------------
         if matrizComandos[1]=='*':#COMANDO: SELECT *
             if matrizComandos[2]==' ':#COMANDO: SELECT *
-                
                 for id in range(len(ParaUse)):
-                    if SetIdUse[0]==ParaUse[id][0]:#OBTIENE ||elementos||
+                    if SetIdUse[0]==ParaUse[id][0]:#OBTIENE ||SET>>elementoss||
                         AutomataAon.automata(ParaUse[id][1])#OBTIENE || ||ARHCIVO||
-                        print()
+                        break
             else:#COMANDO: SELECT * .....
                 print()
         #-----------------------#COMANDO: SELECT 1, 2--------------------

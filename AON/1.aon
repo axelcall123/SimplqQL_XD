@@ -1,7 +1,7 @@
 (
     <
-        [atributo_numerico] = 45.09454512354,
-        [atributo_cadena] = "hola mundo como le va xd",
+        [atributo_numerico] = 45.09,
+        [atributo_cadena] = "hola mundo",
         [atributo_booleano] = true
     >,
     <
@@ -14,5 +14,4 @@
         [atributo_cadena] = "este es otro ejemplo, las cadenas pueden ser muy largas",
         [atributo_booleano] = false
     >
-
 )
