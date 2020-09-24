@@ -7,232 +7,237 @@ def automata(MatrizAon):#OBTENER 1.AON 2.AON LEIDO
     for id in range(len(MatrizAon)):
         print(SeparacionAutomata(MatrizAon[id].read()),"c pillin")
 
-def SeparacionAutomata(Texto):
-    TokenObtenido=[]#LISTA QUE LLEVA |||NOMBRE TOKEN|| TOKEN||
-    #print(Texto)
-    PalabraError=''
-    Texto=Texto+"@$#$@"
-    #print(Texto)
+def SeparacionAutomata(nueva_cadena):
+    state=0
     palabrad=''
-    state=-1
-    SinTabAEs=Texto.replace(" ","").split()#RENPLAZANDO ESPACIOS
-    nueva_cadena="".join(SinTabAEs)#REMPLAZANDO TABS
-    nueva_cadena=nueva_cadena.lower()#todo EN MINUSCULAS
-
+    nueva_cadena=nueva_cadena+"@$#$@"
     for i in range(len(nueva_cadena)):
-        print()
-        #----------------------BIENDO EL ( ( ( ( ( ( ( ( ( ( ( ( (
-        if state==-1:
-            print("posicion -1")
-            print(PalabraError)
-            if nueva_cadena[i]=="(":
-                TokenObtenido.append(["|T_()Inicio|", nueva_cadena[i]])#TODO: LISTA 1
-                state=0
+        if state==0:
+             if nueva_cadena[i]=="(":
+                 print("|T_()Inicio|.0", nueva_cadena[i])
+                 state=1
+                 continue
+             else:
+                 print("Error:0",nueva_cadena[i],"pos",i)
+                 return
+        
+        elif state==1:
+           if nueva_cadena[i]=="\n":
+               print("/", nueva_cadena[i])
+               state=2
+           else:
+                 print("Error:1",nueva_cadena[i],"pos",i)
+                 return
+        
+        elif state==2:
+            if nueva_cadena[i+1]==" ":
+                print("_", nueva_cadena[i])
+                state=2
+            elif nueva_cadena[i+1]=="<":
+                state=3
+            elif nueva_cadena[i+1]=="[":
+                state=4
+            elif nueva_cadena[i]==" " and nueva_cadena[i+1]=="=":
+                print("_", nueva_cadena[i])
+                state=7
             else:
-                print("Error:-1",nueva_cadena[i],"pos",i)
-                TokenObtenido.append(["ERROR"])
-                return
+                print("Error",nueva_cadena[i],"")
+                print(nueva_cadena[0:i])
 
-        #----------------------BIENDO EL < < < < < < < < < < < < <
-        elif state==0:
-            print("posicion 0")
-            print(PalabraError)
+        elif state==3:
             if nueva_cadena[i]=="<":
-                TokenObtenido.append(["|T_<>Inicio|",nueva_cadena[i]])#TODO: LISTA 2
+                print("|T_<>Inicio|.3",nueva_cadena[i],"")
                 state=1
             else:
-                print("Error:0",nueva_cadena[i],"pos",i)
-                TokenObtenido.append("ERROR")
+                print("Error:3",nueva_cadena[i],"pos",i)
                 return
-        #----------------------BIENDO [ [ [ [ [ [ [ [ [ [ [ [
-        elif state==1:
-            print("posicion 1")
-            print(PalabraError)
+
+        elif state==4:
             if nueva_cadena[i]=="[":
-                TokenObtenido.append(["|T_[]Inicio|.1",nueva_cadena[i]])#TODO: LISTA 3
-                if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BIENDO LETRAS
-                    state=2#NOTE: CAMBIA DE CODIGO AL ORIGINAL
-                else:
-                    print("Error:1.1",nueva_cadena[i],"pos",i)
-                    TokenObtenido.append("ERROR")
-                    return
+                print("|T_[]Inicio|.4",nueva_cadena[i],"")
             else:
-                print("Error:1.2",nueva_cadena[i],"pos",i)
-                TokenObtenido.append("ERROR")
-                return
-        #----------------------BIENDO [aaa_def][_] [aaa_def][_] [aaa_def][_] [aaa_def][_]
-        ###############BIENDO  abc abc abc abc abc
-        elif state==2:
-            print("posicion 2")
-            print(PalabraError)
+                 if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BINEDO LETRAS
+                    state=5
+                 else:
+                     print("Error:4",nueva_cadena[i],"pos",i)
+                     return
+
+        elif state==5:
             if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:
-                state=2
+                state=5
                 palabrad=palabrad+nueva_cadena[i]
-            elif nueva_cadena[i]=="_":#ABD_>>>>>>DDD
-                state=3
+            elif nueva_cadena[i]=="_":
                 palabrad=palabrad+nueva_cadena[i]
+                state=6
             else:
-                print("Error_Atri:2",nueva_cadena[i],"")
-                TokenObtenido.append("ERROR")
-                break
-        ###############BIENDO _ POS FINAL ] ] ] ] ] ]
-        elif state==3:
-            print("posicion 3")
-            print(PalabraError)
-            if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:#BIENDO LETRAS
-                state=3
-                palabrad=palabrad+nueva_cadena[i]
-            elif nueva_cadena[i]=="]":#[ABCD_DEF]
-                TokenObtenido.append(["|T_Atributo|",palabrad])#TODO: LISTA 4
-                TokenObtenido.append(["|T_[]Fin|",nueva_cadena[i]])
-                palabrad=''
-                state=4
-            else:
-                print("Error_Atri:3",nueva_cadena[i],'pos',i)
-                TokenObtenido.append("ERROR")
-                break
-        #----------------------BIENDO = = =  =   =   =   =   = SEPARACION PALABRA o NUMERO o FALSO
-        elif state==4:#BIENDO=
-            print("posicion 4")
-            print(PalabraError)
-            if nueva_cadena[i]=='=':
-                TokenObtenido.append(["|T_igual|.4",nueva_cadena[i]])
-                if ord(nueva_cadena[i+1])>=48 and ord(nueva_cadena[i+1])<=57:#BIENDO NUMEROS
-                    state=5
-                elif nueva_cadena[i+1]=='"':#BIENDO PALABRAS
-                    state=6
-                elif ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BIENDO LETRAS
-                    state=10
-                elif nueva_cadena[i+1]=="-" or nueva_cadena[i+1]=="+":#BIENDO SI HAY UN + o -
-                    state=5
-                else:
-                    print("Error_Atri:4.1",nueva_cadena[i],"pos",i)
-                    TokenObtenido.append("ERROR")
-                    return
-            else:
-                print("Error_Atri:4.2",nueva_cadena[i],"pos",i)
-                TokenObtenido.append("ERROR")
+                print("Error:5",nueva_cadena[i],"pos",i)
                 return
-        #----------------------BIENDO +-NUMERO +-NUMERO +-NUMERO +-NUMERO
-        elif state==5:#BIENDO #.#
-            print("posicion 5")
-            print(PalabraError)
-            if ord(nueva_cadena[i])>=48 and ord(nueva_cadena[i])<=57:#BIENDO NUMEROS
-                state=5
-                palabrad=palabrad+nueva_cadena[i]
-            elif nueva_cadena[i]=="-" or nueva_cadena[i]=="+":#BIENDO +-
-                state=5
-                palabrad=palabrad+nueva_cadena[i]
-            else:
-                if nueva_cadena[i]==".":#BIENDO .
-                    state=5
-                    palabrad=palabrad+nueva_cadena[i]
-                elif nueva_cadena[i]==",":#BIENDO ,
-                    state=1
-                    TokenObtenido.append(["|T_Numero|",palabrad])#TODO: LISTA 5
-                    TokenObtenido.append(["|T_Coma|",nueva_cadena[i]])#TODO: LISTA 6
-                    palabrad=''
-                else:
-                    print("Error_Num:6",nueva_cadena[i],"pos",i)
-                    TokenObtenido.append("ERROR")
-                    return
-        #----------------------BIENDO PALABRAS aaa,vvvv aaa,vvvv aaa,vvvv aaa,vvvv
+
         elif state==6:
-            print("posicion 6")
-            print(PalabraError)
-            if nueva_cadena[i]=='"':#BIENDO "
-                TokenObtenido.append(["|T_""_Inicio|",nueva_cadena[i]])#TODO: LISTA 7
-                state=7
+            if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:
+                state=6
+                palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]=="]":
+                print("|T_Atributo|.3",palabrad,"")
+                print("|T_[]Fin|.3",nueva_cadena[i],"")
+                palabrad=''
+                state=2
+            else:
+                print("Error:6",nueva_cadena[i],"pos",i)
+                return
 
         elif state==7:
-            print("posicion 7")
-            print(PalabraError)
-            if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:
-                state=7
-                palabrad=palabrad+nueva_cadena[i]
-            elif nueva_cadena[i]==",":#BIENDO ,
-                state=8
-                palabrad=palabrad+nueva_cadena[i]
-            elif nueva_cadena[i]=='"':#BIENDO "
-                TokenObtenido.append(["|T_Palabra|",palabrad])#TODO: Lista 8
-                TokenObtenido.append(["|T_""_Final|.7",nueva_cadena[i]])#TODO: LISTA 9
-                palabrad=''
-                state=9
+            if nueva_cadena[i]=='=':
+                print("|T_=|.4",nueva_cadena[i],"")
+            if nueva_cadena[i+1]==" ":
+                print("war")
+                if ord(nueva_cadena[i+2])>=48 and ord(nueva_cadena[i+2])<=57:
+                    state=8
+                elif nueva_cadena[i+2]=="+" or nueva_cadena[i+2]=="-":
+                    state=8
+                elif nueva_cadena[i+2]=='"':
+                    state=11
+                elif ord(nueva_cadena[i+2])>=97 and ord(nueva_cadena[i+2])<=122:
+                    state=16
+                else:
+                    print("Error:7.1",nueva_cadena[i],"pos",i)
+                    return
             else:
-                print("Error_Num:7",nueva_cadena[i],"pos",i)
-                TokenObtenido.append("ERROR")
+                print("Error:7.2",nueva_cadena[i],"pos",i)
                 return
-          #----------------------BIENDO
+
         elif state==8:
-            print("posicion 8")
-            print(PalabraError)
-            if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:#BINEDO LETRAS
-                state=8
-                palabrad=palabrad+nueva_cadena[i]
-            elif nueva_cadena[i]=='"':#BINEDO "FIN
-                TokenObtenido.append(["|T_Palabra|",palabrad])#TODO: LISTA 10
-                TokenObtenido.append(["|T_""_Final|",nueva_cadena[i]])#TODO: LISTA 11
-                palabrad=''
-                state=9
-            else:
-                print("Error_Atri:8",nueva_cadena[i],"pos",i)
-                TokenObtenido.append("ERROR")
-                return
+            state=9
 
         elif state==9:
-            print("posicion 9")
-            print(PalabraError)
-            if nueva_cadena[i]==',':#BIENDO,>>>> FALSE TRUE
-                TokenObtenido.append(["|T_Coma|",nueva_cadena[i]])#TODO: LISTA 12
-                state=1
-            else:
-                print("Error_Atri:9",nueva_cadena[i],"pos",i)
-                TokenObtenido.append("ERROR")
-                return
-        #VIENDO TURE FALSE
-        elif state==10:
-            print("posicion 10")
-            print(PalabraError)
-            if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:#BINEDO LETRAS
+            if ord(nueva_cadena[i])>=48 and ord(nueva_cadena[i])<=57:
+                state=9
+                palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]=="-" or nueva_cadena[i]=="+":
+                state=9
+                palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]==".":
                 state=10
                 palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]==",":
+                state=1
+                print("|T_Numero|.9",palabrad,"")
+                print("|T_Coma|.9",nueva_cadena[i],"")
+                palabrad=''
+                #NO TERMINADO LOL XD JAJAJAJAJAJAJ
+            else:
+                print("Error:9",nueva_cadena[i],"pos",i)
+                return
 
-            elif nueva_cadena[i]=='>':
-                if palabrad=="false":
-                    TokenObtenido.append(["|T_VF|",palabrad]) #TODO: LISTA 13
-                    TokenObtenido.append(["|T_<>Fin|",nueva_cadena[i]])#TODO: LISTA 14
-                    palabrad=''
-                    state=11
-                elif palabrad=="true":
-                    TokenObtenido.append(["|T_VF|",palabrad])#TODO: LISTA 15
-                    TokenObtenido.append(["|T_<>Fin|",nueva_cadena[i]])#TODO: LISTA 16
-                    palabrad=''
-                    state=11
-                else:
-                    print("Error_Atri:10",nueva_cadena[i],"pos",i)
-                    TokenObtenido.append("ERROR")
-                    return
+        elif state==10:
+            if ord(nueva_cadena[i])>=48 and ord(nueva_cadena[i])<=57:
+                state=10
+                palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]==",":
+                state=1
+                print("|T_Numero|.10",palabrad,"")
+                print("|T_Coma|.10",nueva_cadena[i],"")
+                palabrad=''
 
         elif state==11:
-            print("posicion 11")
-            print(PalabraError)
-            if nueva_cadena[i]==',':
-                TokenObtenido.append(["|T_Coma|.11",nueva_cadena[i]])
-                state=12
-                if nueva_cadena[i+1]=='<':
-                    TokenObtenido.append(["NUEVO","nuevo"])
-                    state=0
-
+            print("_")
+            state=12
+        
+        elif state==12:
+            print('|T_""Inicio|.12',nueva_cadena[i],"")
+            if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:
+                state=13
             else:
-                if nueva_cadena[i]==')':
-                    TokenObtenido.append()
-                    print("|T_ParenFin|.11", nueva_cadena[i],"")
-                    state=12
-                    if nueva_cadena[i:len(nueva_cadena)]==")@$#$@":
-                        print("Fin")
-                        return
-                    else:
-                        print("Error")
-                        TokenObtenido.append("ERROR")
-        #PalabraError=PalabraError+nueva_cadena[i]
-    return TokenObtenido
+                print("Error:12",nueva_cadena[i],"pos",i)
+
+        elif state==13:
+            if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:
+                state=13
+                palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]==" ":
+                state=13
+                palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]==",":
+                if nueva_cadena[i+1]==" ":
+                    state=14
+                    palabrad=palabrad+nueva_cadena[i]
+                else:
+                    print("Error:13.1",nueva_cadena[i],"pos",i)
+            elif nueva_cadena[i]=='"':
+                print("|T_Palabra|.13",palabrad,"")
+                print('|T_""Final|.13',nueva_cadena[i],"")
+                palabrad=''
+                state=15
+            else:
+                print("Error:13.2",nueva_cadena[i],"pos",i)
+                return
+
+        elif state==14:
+            if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:
+                state=14
+                palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]==" ":
+                state=14
+                palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]=='"':
+                print("|T_Palabra|.13",palabrad,"")
+                print('|T_""Final|.13',nueva_cadena[i],"")
+                palabrad=''
+                state=15
+            else:
+                print("Error:14",nueva_cadena[i],"pos",i)
+                return
+
+        elif state==15:
+            if nueva_cadena[i]==",":
+                state=1
+            else:
+                print("Error:15",nueva_cadena[i],"pos",i)
+                return
+
+        elif state==16:
+            print("_")
+            state=17
+
+        elif state==17:
+            if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:
+                state=17
+                palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]=='\n':
+                if palabrad=="false" or "true":
+                    print("|T_VF|.17",palabrad,"")
+                    print("/")
+                    palabrad=''
+                    state=18
+                else:
+                    print("Error:17",nueva_cadena[i],"pos",i)
+
+        elif state==18:
+            if nueva_cadena[i]=='>':
+                print("|T_<>Fin|.17",palabrad,"")
+                if nueva_cadena[i+1]==",":
+                    state=19
+                elif nueva_cadena[i+1]=="\n":
+                    state=20
+                else:
+                     print("Error:18",nueva_cadena[i],"")
+
+        elif state==19:
+            print("|T_coma|.19",nueva_cadena[i],"")
+            if nueva_cadena[i+1]==" ":
+                print("------------------NUEVO---------------------------")
+                state=2
+
+        elif state==20:
+            print("/")
+            state=21
+
+        elif state==21:
+            if nueva_cadena[i]==")":
+                 print("|T_()Fin|.11", nueva_cadena[i],"")
+                 if nueva_cadena[i:len(nueva_cadena)]==")@$#$@":
+                     print("Fin")
+                     return
+                 else:
+                     print("Error:21",nueva_cadena[i],"")
+
