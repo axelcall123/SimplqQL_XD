@@ -58,7 +58,17 @@ while salir==True:
             if matrizComandos[2]==' ':#COMANDO: SELECT *
                 for id in range(len(ParaUse)):
                     if SetIdUse==ParaUse[id][0]:#OBTIENE ||SET>>elementoss||
-                        AutomataAon.automata(ParaUse[id][1])#OBTIENE || ||ARHCIVO||
+                        ayuda=AutomataAon.automata(ParaUse[id][1])#OBTIENE || ||ARHCIVO||
+                        #print(ayuda[0])#ARCHIVO 1,n
+                        #print(ayuda[0][0])#||ATRIBUTO||OPCION|| 1,n
+                        #print(ayuda[0][0][0])#||ATRIBUTO|| aa_aa
+                        
+                        #CICLO FOR PARA LOS ATRIBUTOS Y ARCHIVOS
+                        for a in range(len(ayuda)):
+                            for b in range(len(ayuda[a])):
+                                print(ayuda[a][b][0],"=",ayuda[a][b][1])                  
+                                print("NEW ATRI")
+                            PRINT("----------")
                         break
             else:#COMANDO: SELECT * .....
                 print()
