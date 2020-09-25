@@ -1,7 +1,7 @@
 textos="""
 (
     <
-        [atributo_numerico] = 4.09,
+        [b] = 4.09,
         [atributo_cadena] = "hola mundo xd lol ce mamut, nel",
         [atributo_booleano] = true
     >,
@@ -68,17 +68,21 @@ def automata(nueva_cadena):
         elif state==4:
             if nueva_cadena[i]=="[":
                 print("|T_[]Inicio|.4",nueva_cadena[i],"")
-            else:
-                 if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BINEDO LETRAS
+                if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BINEDO LETRAS
                     state=5
-                 else:
-                     print("Error:4",nueva_cadena[i],"pos",i)
-                     return
+                else:
+                    print("Error:4",nueva_cadena[i],"pos",i)
+                    return
 
         elif state==5:
             if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:
                 state=5
                 palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]=="]":
+                print("|T_Atributo|.5",palabrad,"")
+                print("|T_[]Fin|.5",nueva_cadena[i],"")
+                palabrad=''
+                state=2
             elif nueva_cadena[i]=="_":
                 palabrad=palabrad+nueva_cadena[i]
                 state=6
@@ -91,8 +95,8 @@ def automata(nueva_cadena):
                 state=6
                 palabrad=palabrad+nueva_cadena[i]
             elif nueva_cadena[i]=="]":
-                print("|T_Atributo|.3",palabrad,"")
-                print("|T_[]Fin|.3",nueva_cadena[i],"")
+                print("|T_Atributo|.6",palabrad,"")
+                print("|T_[]Fin|.6",nueva_cadena[i],"")
                 palabrad=''
                 state=2
             else:

@@ -1,23 +1,34 @@
 #import Principal
 #Principal
+import os
+my_path = os.path.abspath(os.path.dirname(__file__))
 
 
-def automata(MatrizAon):#OBTENER 1.AON 2.AON LEIDO
+def CicloAon(comparacion,MatrizUrl):
+    for id in range(len(MatrizUrl)):
+        if comparacion==MatrizUrl[id][0]:#OBTIENE COMPARA ||SET>>elementoss||
+            ayuda=automata(MatrizUrl[id][1])#OBTIENE || ||ARHCIVO||
+    return ayuda
+
+def automata(MatrizEx):#OBTENER 1.AON 2.AON LEIDO
     retorno=[]
     matriz=[]
-    for id in range(len(MatrizAon)):
-        ayuda=SeparacionAutomata(MatrizAon[id].read())
+    for id in range(len(MatrizEx)):
+        ayuda=SeparacionAutomata(MatrizEx[id])
         matriz.append(ayuda)
-        #print(matriz,"automata")
     return matriz
-        
-def SeparacionAutomata(nueva_cadena):
+
+def SeparacionAutomata(NombreAon):
     state=0
     palabrad=''
     AtriOp=[]
     Atributo=''
-    nueva_cadena=nueva_cadena+"@$#$@"
+    archivo=open(os.path.join(my_path, str("../SimplqQL_XD/AON/"+NombreAon)),"r")#LEYEDNO
+    nueva_cadena=archivo.read()+"@$#$@"#LEIDO+VERIFICACION
+    archivo.close()
+    #print(nueva_cadena, "MENSAJEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
     for i in range(len(nueva_cadena)):
+        
         if state==0:
              if nueva_cadena[i]=="(":
                  #print("|T_()Inicio|.0", nueva_cadena[i])
@@ -34,7 +45,7 @@ def SeparacionAutomata(nueva_cadena):
                  print("Error:1",nueva_cadena[i],"pos",i)
                  break
         
-        elif state==2:
+        elif state==2:#n espacios
             if nueva_cadena[i+1]==" ":
                 #print("_", nueva_cadena[i])
                 state=2
@@ -61,17 +72,22 @@ def SeparacionAutomata(nueva_cadena):
             if nueva_cadena[i]=="[":
                 a=1
                 #print("|T_[]Inicio|.4",nueva_cadena[i],"")
-            else:
-                 if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BINEDO LETRAS
-                    state=5
-                 else:
-                     print("Error:4",nueva_cadena[i],"pos",i)
-                     break
+                if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BIENDO LETRAS
+                    state=5#TODO: cambio
+                else:
+                    print("Error:4",nueva_cadena[i],"pos",i)
+                    break
 
         elif state==5:
             if ord(nueva_cadena[i])>=97 and ord(nueva_cadena[i])<=122:
                 state=5
                 palabrad=palabrad+nueva_cadena[i]
+            elif nueva_cadena[i]=="]":
+                #print("|T_Atributo|.5",palabrad,"")
+                Atributo=palabrad
+                 #print("|T_[]Fin|.5",nueva_cadena[i],"")
+                palabrad=''
+                state=2
             elif nueva_cadena[i]=="_":
                 palabrad=palabrad+nueva_cadena[i]
                 state=6
@@ -154,7 +170,7 @@ def SeparacionAutomata(nueva_cadena):
         
         elif state==12:
             #print('|T_""Inicio|.12',nueva_cadena[i],"")
-            if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:
+            if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BIENDO LETRAS
                 state=13
             else:
                 print("Error:12",nueva_cadena[i],"pos",i)

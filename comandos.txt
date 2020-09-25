@@ -4,4 +4,6 @@ LOAD INTO 1a FILES 1.aon, 2.aon
 	ParaUse[1,...],ParaUse[][],ParaUse[][][]
 USE SET 1a
 	SetIdUse[1]
-SELECT * 
+SELECT *
+	Ayuda[0][0][0]
+SELECT * WHERE a = 6

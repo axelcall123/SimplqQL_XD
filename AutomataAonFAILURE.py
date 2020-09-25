@@ -26,7 +26,7 @@ def SeparacionAutomata(Texto):
             print("posicion -1")
             print(PalabraError)
             if nueva_cadena[i]=="(":
-                TokenObtenido.append(["|T_()Inicio|", nueva_cadena[i]])#TODO: LISTA 1
+                TokenObtenido.append(["|T_()Inicio|", nueva_cadena[i]])# 1
                 state=0
             else:
                 print("Error:-1",nueva_cadena[i],"pos",i)
@@ -37,7 +37,7 @@ def SeparacionAutomata(Texto):
             print("posicion 0")
             print(PalabraError)
             if nueva_cadena[i]=="<":
-                TokenObtenido.append(["|T_<>Inicio|",nueva_cadena[i]])#TODO: LISTA 2
+                TokenObtenido.append(["|T_<>Inicio|",nueva_cadena[i]])# 2
                 state=1
             else:
                 print("Error:0",nueva_cadena[i],"pos",i)
@@ -48,7 +48,7 @@ def SeparacionAutomata(Texto):
             print("posicion 1")
             print(PalabraError)
             if nueva_cadena[i]=="[":
-                TokenObtenido.append(["|T_[]Inicio|.1",nueva_cadena[i]])#TODO: LISTA 3
+                TokenObtenido.append(["|T_[]Inicio|.1",nueva_cadena[i]])# 3
                 if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BIENDO LETRAS
                     state=2#NOTE: CAMBIA DE CODIGO AL ORIGINAL
                 else:
@@ -82,7 +82,7 @@ def SeparacionAutomata(Texto):
                 state=3
                 palabrad=palabrad+nueva_cadena[i]
             elif nueva_cadena[i]=="]":#[ABCD_DEF]
-                TokenObtenido.append(["|T_Atributo|",palabrad])#TODO: LISTA 4
+                TokenObtenido.append(["|T_Atributo|",palabrad])# 4
                 TokenObtenido.append(["|T_[]Fin|",nueva_cadena[i]])
                 palabrad=''
                 state=4
@@ -128,8 +128,8 @@ def SeparacionAutomata(Texto):
                     palabrad=palabrad+nueva_cadena[i]
                 elif nueva_cadena[i]==",":#BIENDO ,
                     state=1
-                    TokenObtenido.append(["|T_Numero|",palabrad])#TODO: LISTA 5
-                    TokenObtenido.append(["|T_Coma|",nueva_cadena[i]])#TODO: LISTA 6
+                    TokenObtenido.append(["|T_Numero|",palabrad])# 5
+                    TokenObtenido.append(["|T_Coma|",nueva_cadena[i]])# 6
                     palabrad=''
                 else:
                     print("Error_Num:6",nueva_cadena[i],"pos",i)
@@ -140,7 +140,7 @@ def SeparacionAutomata(Texto):
             print("posicion 6")
             print(PalabraError)
             if nueva_cadena[i]=='"':#BIENDO "
-                TokenObtenido.append(["|T_""_Inicio|",nueva_cadena[i]])#TODO: LISTA 7
+                TokenObtenido.append(["|T_""_Inicio|",nueva_cadena[i]])# 7
                 state=7
 
         elif state==7:
@@ -153,8 +153,8 @@ def SeparacionAutomata(Texto):
                 state=8
                 palabrad=palabrad+nueva_cadena[i]
             elif nueva_cadena[i]=='"':#BIENDO "
-                TokenObtenido.append(["|T_Palabra|",palabrad])#TODO: Lista 8
-                TokenObtenido.append(["|T_""_Final|.7",nueva_cadena[i]])#TODO: LISTA 9
+                TokenObtenido.append(["|T_Palabra|",palabrad])# 8
+                TokenObtenido.append(["|T_""_Final|.7",nueva_cadena[i]])# 9
                 palabrad=''
                 state=9
             else:
@@ -169,8 +169,8 @@ def SeparacionAutomata(Texto):
                 state=8
                 palabrad=palabrad+nueva_cadena[i]
             elif nueva_cadena[i]=='"':#BINEDO "FIN
-                TokenObtenido.append(["|T_Palabra|",palabrad])#TODO: LISTA 10
-                TokenObtenido.append(["|T_""_Final|",nueva_cadena[i]])#TODO: LISTA 11
+                TokenObtenido.append(["|T_Palabra|",palabrad])# 10
+                TokenObtenido.append(["|T_""_Final|",nueva_cadena[i]])# 11
                 palabrad=''
                 state=9
             else:
@@ -182,7 +182,7 @@ def SeparacionAutomata(Texto):
             print("posicion 9")
             print(PalabraError)
             if nueva_cadena[i]==',':#BIENDO,>>>> FALSE TRUE
-                TokenObtenido.append(["|T_Coma|",nueva_cadena[i]])#TODO: LISTA 12
+                TokenObtenido.append(["|T_Coma|",nueva_cadena[i]])# 12
                 state=1
             else:
                 print("Error_Atri:9",nueva_cadena[i],"pos",i)
@@ -198,13 +198,13 @@ def SeparacionAutomata(Texto):
 
             elif nueva_cadena[i]=='>':
                 if palabrad=="false":
-                    TokenObtenido.append(["|T_VF|",palabrad]) #TODO: LISTA 13
-                    TokenObtenido.append(["|T_<>Fin|",nueva_cadena[i]])#TODO: LISTA 14
+                    TokenObtenido.append(["|T_VF|",palabrad]) # 13
+                    TokenObtenido.append(["|T_<>Fin|",nueva_cadena[i]])# 14
                     palabrad=''
                     state=11
                 elif palabrad=="true":
-                    TokenObtenido.append(["|T_VF|",palabrad])#TODO: LISTA 15
-                    TokenObtenido.append(["|T_<>Fin|",nueva_cadena[i]])#TODO: LISTA 16
+                    TokenObtenido.append(["|T_VF|",palabrad])# 15
+                    TokenObtenido.append(["|T_<>Fin|",nueva_cadena[i]])# 16
                     palabrad=''
                     state=11
                 else:

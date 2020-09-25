@@ -101,6 +101,6 @@ def FiltroCom(comando):
     #FILTRAR COMANDOS 10
     matrizComandos.append(sep_palabras_es[9])
 
-    print(matrizComandos, "COMANDO EVALUAR")
+    print(matrizComandos, "COMANDO EVALUAR")# TODO: MENSAJE
     return matrizComandos
     #print(sep_palabras_es)
