@@ -19,7 +19,15 @@ ParaUse=[]#MATRIZ DE ||a||archivo.aon||
 #print(nel)
 #print(hola)
 Comando.hola()
+def SepNew():
+    print()
 
+def AigualBAND(num1,num2,Atri,igual,Opc):
+    print()
+
+def AigualB(num1,num2,Atri,igual,Opc):
+    if (Atri==AonAtriOp[num1][num2][0] and matrizComandos[4]=="=") and Opc==AonAtriOp[num1][num2][1]:
+        print(AonAtriOp[num1][num2][0],"=",AonAtriOp[num1][num2][1])
 
 while salir==True:
     AonAtriOp=[]
@@ -53,9 +61,6 @@ while salir==True:
                 if matrizComandos[2]==ParaUse[id][0]:#OBTIENE ||SET>>elementos||
                     SetIdUse=matrizComandos[2]     
                     print(SetIdUse, "ID:USE")
-                    
-                    print()
-    
 #---------------------------------------------------------------------------
 #---------------------------------------------------------------------------
     elif matrizComandos[0]=='SELECT':     
@@ -69,11 +74,18 @@ while salir==True:
                 for a in range(len(AonAtriOp)):#CICLO FOR PARA LOS ATRIBUTOS Y ARCHIVOS
                     for b in range(len(AonAtriOp[a])):
                         print(AonAtriOp[a][b][0],"=",AonAtriOp[a][b][1])                  
-                    print("----------")
-            elif matrizComandos[2]=='WHERE':# SELECT * WHERE a = 6
-                print()
-
-
+            
+            elif matrizComandos[2]=='WHERE':
+                    AonAtriOp=AutomataAon.CicloAon(SetIdUse,ParaUse)
+                    if matrizComandos[6]==" ":# SELECT * WHERE a = 6
+                        for a in range(len(AonAtriOp)):#CICLO FOR PARA LOS ATRIBUTOS Y ARCHIVOS
+                            for b in range(len(AonAtriOp[a])):
+                                AigualB(a,b,matrizComandos[3],matrizComandos[4],matrizComandos[5])
+             
+                    elif matrizComandos[7]=="AND":     
+                         for a in range(len(AonAtriOp)):#CICLO FOR PARA LOS ATRIBUTOS Y ARCHIVOS
+                            for b in range(len(AonAtriOp[a])):
+                                print()
         #-----------------------#COMANDO: SELECT 1, 2--------------------
         else:#COMANDO SELECT: 1, 2
             print()

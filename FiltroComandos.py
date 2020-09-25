@@ -6,7 +6,7 @@ comandoSeco=('SET','INTO','*','ATTRIBUTES','IN','TO','TOKENS')
 comandoTer=('WHERE')
 comandoCuar=('FILES','COUNT','SUM','SELECT')
 comandoCin=('=','<','>','=<','=>','*')
-comandoCon=('AND','OR','XOR',)
+comandoCon=('AND','OR','XOR')
 #
 def FiltroCom(comando):
     matrizComandos=[]

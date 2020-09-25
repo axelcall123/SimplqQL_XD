@@ -253,7 +253,8 @@ def SeparacionAutomata(NombreAon):
         elif state==19:
             #print("|T_coma|.19",nueva_cadena[i],"")
             if nueva_cadena[i+1]==" ":
-                print("------------------NUEVO---------------------------")
+                #print("------------------NUEVO---------------------------")
+                AtriOp.append(["-NEW","NUEVO-"])
                 state=2
 
         elif state==20:
@@ -265,6 +266,7 @@ def SeparacionAutomata(NombreAon):
                  #print("|T_()Fin|.11", nueva_cadena[i],"")
                  if nueva_cadena[i:len(nueva_cadena)]==")@$#$@":
                      print("Fin")
+                     AtriOp.append(["*END","FIN*"])
                      break
                  else:
                      print("Error:21",nueva_cadena[i],"")
