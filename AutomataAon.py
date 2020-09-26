@@ -19,6 +19,7 @@ def automata(MatrizEx):#OBTENER 1.AON 2.AON LEIDO
     return matriz
 
 def SeparacionAutomata(NombreAon):
+    subb=0
     state=0
     palabrad=''
     AtriOp=[]
@@ -28,7 +29,7 @@ def SeparacionAutomata(NombreAon):
     archivo.close()
     #print(nueva_cadena, "MENSAJEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
     for i in range(len(nueva_cadena)):
-        
+
         if state==0:
              if nueva_cadena[i]=="(":
                  #print("|T_()Inicio|.0", nueva_cadena[i])
@@ -36,7 +37,7 @@ def SeparacionAutomata(NombreAon):
              else:
                  print("Error:0",nueva_cadena[i],"pos",i)
                  break
-        
+
         elif state==1:
            if nueva_cadena[i]=="\n":
                #print("/", nueva_cadena[i])
@@ -44,7 +45,7 @@ def SeparacionAutomata(NombreAon):
            else:
                  print("Error:1",nueva_cadena[i],"pos",i)
                  break
-        
+
         elif state==2:#n espacios
             if nueva_cadena[i+1]==" ":
                 #print("_", nueva_cadena[i])
@@ -145,7 +146,7 @@ def SeparacionAutomata(NombreAon):
             elif nueva_cadena[i]==",":
                 state=1
                 #print("|T_Numero|.9",palabrad,"")
-                AtriOp.append([Atributo,palabrad])
+                AtriOp.append([Atributo,palabrad,subb])
                 #print("|T_Coma|.9",nueva_cadena[i],"")
                 palabrad=''
                 #NO TERMINADO LOL XD JAJAJAJAJAJAJ
@@ -160,14 +161,14 @@ def SeparacionAutomata(NombreAon):
             elif nueva_cadena[i]==",":
                 state=1
                 #print("|T_Numero|.10",palabrad,"")
-                AtriOp.append([Atributo,palabrad])
+                AtriOp.append([Atributo,palabrad,subb])
                 #print("|T_Coma|.10",nueva_cadena[i],"")
                 palabrad=''
 
         elif state==11:
             #print("_")
             state=12
-        
+
         elif state==12:
             #print('|T_""Inicio|.12',nueva_cadena[i],"")
             if ord(nueva_cadena[i+1])>=97 and ord(nueva_cadena[i+1])<=122:#BIENDO LETRAS
@@ -190,7 +191,7 @@ def SeparacionAutomata(NombreAon):
                     print("Error:13.1",nueva_cadena[i],"pos",i)
             elif nueva_cadena[i]=='"':
                 #print("|T_Palabra|.13",palabrad,"")
-                AtriOp.append([Atributo,palabrad])
+                AtriOp.append([Atributo,palabrad,subb])
                 #print('|T_""Final|.13',nueva_cadena[i],"")
                 palabrad=''
                 state=15
@@ -207,7 +208,8 @@ def SeparacionAutomata(NombreAon):
                 palabrad=palabrad+nueva_cadena[i]
             elif nueva_cadena[i]=='"':
                 #print("|T_Palabra|.13",palabrad,"")
-                AtriOp.append([Atributo,palabrad])
+                AtriOp.append([Atributo,palabrad,subb])
+                
                 #print('|T_""Final|.13',nueva_cadena[i],"")
                 palabrad=''
                 state=15
@@ -233,7 +235,7 @@ def SeparacionAutomata(NombreAon):
             elif nueva_cadena[i]=='\n':
                 if palabrad=="false" or "true":
                     #print("|T_VF|.17",palabrad,"")
-                    AtriOp.append([Atributo,palabrad])
+                    AtriOp.append([Atributo,palabrad,subb])
                     #print("/")
                     palabrad=''
                     state=18
@@ -254,7 +256,8 @@ def SeparacionAutomata(NombreAon):
             #print("|T_coma|.19",nueva_cadena[i],"")
             if nueva_cadena[i+1]==" ":
                 #print("------------------NUEVO---------------------------")
-                AtriOp.append(["-NEW","NUEVO-"])
+                AtriOp.append(["-NEW","NUEVO-",subb])
+                subb+=1
                 state=2
 
         elif state==20:
@@ -266,7 +269,7 @@ def SeparacionAutomata(NombreAon):
                  #print("|T_()Fin|.11", nueva_cadena[i],"")
                  if nueva_cadena[i:len(nueva_cadena)]==")@$#$@":
                      print("Fin")
-                     AtriOp.append(["*END","FIN*"])
+                     AtriOp.append(["*END","FIN*",-100])
                      break
                  else:
                      print("Error:21",nueva_cadena[i],"")

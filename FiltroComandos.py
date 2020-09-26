@@ -15,10 +15,34 @@ def FiltroCom(comando):
     #seprador_espacio=" "
     #sep_palabras_es= comando.split(seprador_espacio)#SEPARA COMANDO NOMBRE,HOLA,ET
     
+
+
     unir=''#SUSTITUCION SPLIT
     comando=comando+" :"#TOME LA ULTIMA POSICION
+    a=500
+    b=-500
+    c=500
+    d=-500
     for id in range(len(comando)):
-        if comando[id]==' ':
+        if comando[id]=='"' and comando[id+1]!=" ":
+            a=id
+        elif comando[id]=='"' and comando[id+1]==" ":
+            b=id
+
+    for id in range(len(comando)):
+            if (a-1)==id:
+                break
+            elif comando[id]=='"' and comando[id+1]!=" ":
+                c=id
+            elif comando[id]=='"' and comando[id+1]==" ":
+                d=id
+
+    print(a,b,":",c,d)
+    for id in range(0,len(comando)):
+        if (id>=a and id<=b) or (id>=c and id<=d):
+            if comando[id]!='"':
+                unir=unir+comando[id];
+        elif comando[id]==' ':
             sep_palabras_es.append(unir)
             unir=''
         else:
@@ -26,7 +50,6 @@ def FiltroCom(comando):
             
     for id in range(10-len(sep_palabras_es)):
         sep_palabras_es.append(" ")
-    #print(sep_palabras_es, "SIN POP")
 
     #FILTRAR COMANDOS 1
     for id in comandoPrin:
@@ -50,7 +73,7 @@ def FiltroCom(comando):
 
     
 
-    for id in range(10-len(sep_palabras_es)):#EVITAR bug matriz pequeña
+    for id in range(15-len(sep_palabras_es)):#EVITAR bug matriz pequeña
         sep_palabras_es.append(" ")
     #print(sep_palabras_es, "AÑADIDO")
     #FILTRAR COMANDOS 3 
@@ -72,11 +95,10 @@ def FiltroCom(comando):
             matrizComandos.append(MatrizAyuda[0])
             for id in range(int(MatrizAyuda[1])):#QUITA LAS POSICIONES PARA QUE EL COMANDO QUEDE POS 3
                 sep_palabras_es.pop(0)
-            #print(sep_palabras_es, "POP")
             break
    
 
-    for id in range(10-len(sep_palabras_es)):#EVITAR bug matriz pequeña
+    for id in range(15-len(sep_palabras_es)):#EVITAR bug matriz pequeña
         sep_palabras_es.append(" ")
     #print(sep_palabras_es, "AÑADIDO")
 
@@ -94,6 +116,7 @@ def FiltroCom(comando):
     for id in comandoCin:
         if id==sep_palabras_es[8]:# IGUAL COMANDO POS 5
             matrizComandos.append(id)
+            break
         else:
             matrizComandos.append(sep_palabras_es[8])
             break
@@ -104,3 +127,6 @@ def FiltroCom(comando):
     print(matrizComandos, "COMANDO EVALUAR")# TODO: MENSAJE
     return matrizComandos
     #print(sep_palabras_es)
+
+com=input()
+FiltroCom(com)

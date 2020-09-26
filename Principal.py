@@ -19,15 +19,21 @@ ParaUse=[]#MATRIZ DE ||a||archivo.aon||
 #print(nel)
 #print(hola)
 Comando.hola()
-def SepNew():
-    print()
 
-def AigualBAND(num1,num2,Atri,igual,Opc):
-    print()
-
+def PrintArhc(NumArchivo,NumSubArchivo):
+    for b in range(len(AonAtriOp[a])):
+        if AonAtriOp[NumArchivo][b][2]==NumSubArchivo:
+            print(AonAtriOp[NumArchivo][b][0],"=",AonAtriOp[NumArchivo][b][1])
+'''
+IMPRIME:
+||ATRICBUTO||OPCION||0
+||ATRICBUTO||OPCION||1
+||ATRICBUTO||OPCION||2
+'''
 def AigualB(num1,num2,Atri,igual,Opc):
     if (Atri==AonAtriOp[num1][num2][0] and matrizComandos[4]=="=") and Opc==AonAtriOp[num1][num2][1]:
-        print(AonAtriOp[num1][num2][0],"=",AonAtriOp[num1][num2][1])
+        PrintArhc(num1,AonAtriOp[num1][num2][2])
+        return [num1,AonAtriOp[num1][num2][2]]
 
 while salir==True:
     AonAtriOp=[]
@@ -66,7 +72,7 @@ while salir==True:
     elif matrizComandos[0]=='SELECT':     
         #-----------------------#COMANDO: SELECT *--------------------
         if matrizComandos[1]=='*':#COMANDO: SELECT *
-            if matrizComandos[2]==' ':#COMANDO: SELECT *
+            if matrizComandos[2]=='' or matrizComandos[2]==' ':#COMANDO: SELECT *
                 #print(AonAtriOp[0])#ARCHIVO 1,n
                 #print(AonAtriOp[0][0])#||ATRIBUTO||OPCION|| 1,n
                 #print(AonAtriOp[0][0][0])#||ATRIBUTO|| aa_aa
@@ -77,7 +83,7 @@ while salir==True:
             
             elif matrizComandos[2]=='WHERE':
                     AonAtriOp=AutomataAon.CicloAon(SetIdUse,ParaUse)
-                    if matrizComandos[6]==" ":# SELECT * WHERE a = 6
+                    if matrizComandos[6]==" " or matrizComandos[6]=="":# SELECT * WHERE a = 6
                         for a in range(len(AonAtriOp)):#CICLO FOR PARA LOS ATRIBUTOS Y ARCHIVOS
                             for b in range(len(AonAtriOp[a])):
                                 AigualB(a,b,matrizComandos[3],matrizComandos[4],matrizComandos[5])

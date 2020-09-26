@@ -6,4 +6,4 @@ USE SET 1a
 	SetIdUse[1]
 SELECT *
 	Ayuda[0][0][0]
-SELECT * WHERE ac = 1
+SELECT * WHERE ac = 1 AND bb = "2.5,hola xd"

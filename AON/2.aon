@@ -1,12 +1,12 @@
 (
     <
-        [ac] = 1,
+        [atributo_numerico] = 1,
         [atributo_cadena] = "sip",
         [atributo_booleano] = true
     >,
     <
-        [bd] = 95.7,
-        [atributo_cadena] = "nel xd",
+        [aa] = 95.7,
+        [bb] = "nel xd",
         [atributo_booleano] = false
     >,
     <
