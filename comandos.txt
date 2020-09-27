@@ -6,4 +6,50 @@ USE SET 1a
 	SetIdUse[1]
 SELECT *
 	Ayuda[0][0][0]
-SELECT * WHERE ac = 1 AND bb = "2.5,hola xd"
+SELECT * WHERE aa = 1 AND cc = true
+LIST ATTRIBUTES
+
+
+#---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
+    elif matrizComandos[0]=='LIST':
+        if matrizComandos[1]=='ATTRIBUTES':
+            AonAtriOp=AutomataAon.CicloAon(SetIdUse,ParaUse)#COMPARACION,MATRIZ||atributo,[1.aon,2.aon]||
+            for a in range(len(AonAtriOp)):#CICLO FOR PARA LOS ATRIBUTOS Y ARCHIVOS
+                for b in range(len(AonAtriOp[a])):
+                    print(AonAtriOp[a][b][0],"=",AonAtriOp[a][b][1])
+#---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
+    elif matrizComandos[0]=='PRINT':
+        print()
+#---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
+    elif matrizComandos[0]=='MAX':
+
+        print()
+#---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
+    elif matrizComandos[0]=='SUM':
+        print()
+#---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
+    elif matrizComandos[0]=='COUNT':
+        print()
+#---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
+    elif matrizComandos[0]=='REPORT':
+        if matrizComandos[1]=='TOKENS':
+            if atributoS!=None:
+                Tokens.token(matrizComandos)
+#---------------------------------------------------------------------------
+#---------------------------------------------------------------------------
+    elif matrizComandos[0]=='SELECCIONAR':
+        print()
+
+    print(atributoS)
+    atributoS.append(matrizComandos)
+
+    #print(SetIdUse, "usar:elementos") #TODO: MENSAJE
+    #print(SetIdLoad, "load:elementos") #TODO: MENSAJE
+    #print(ParaUse, "vamos a ver el error") #TODO: MENSAJE
+    #print(ParaUse, "ayuda, xd") #TODO: MENSAJE

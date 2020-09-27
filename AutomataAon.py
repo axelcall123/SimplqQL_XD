@@ -5,12 +5,14 @@ my_path = os.path.abspath(os.path.dirname(__file__))
 
 
 def CicloAon(comparacion,MatrizUrl):
+    ayuda=[]
     for id in range(len(MatrizUrl)):
         if comparacion==MatrizUrl[id][0]:#OBTIENE COMPARA ||SET>>elementoss||
             ayuda=automata(MatrizUrl[id][1])#OBTIENE || ||ARHCIVO||
     return ayuda
 
-def automata(MatrizEx):#OBTENER 1.AON 2.AON LEIDO
+def automata(MatrizEx):#OBTIENE 1.AON 2.AON SEPARADO
+    ayuda=[]
     retorno=[]
     matriz=[]
     for id in range(len(MatrizEx)):

@@ -37,7 +37,7 @@ def FiltroCom(comando):
             elif comando[id]=='"' and comando[id+1]==" ":
                 d=id
 
-    print(a,b,":",c,d)
+    #print(a,b,":",c,d)
     for id in range(0,len(comando)):
         if (id>=a and id<=b) or (id>=c and id<=d):
             if comando[id]!='"':
@@ -124,9 +124,6 @@ def FiltroCom(comando):
     #FILTRAR COMANDOS 10
     matrizComandos.append(sep_palabras_es[9])
 
-    print(matrizComandos, "COMANDO EVALUAR")# TODO: MENSAJE
+    #print(matrizComandos, "COMANDO EVALUAR")# TODO: MENSAJE
     return matrizComandos
     #print(sep_palabras_es)
-
-com=input()
-FiltroCom(com)
