@@ -31,7 +31,7 @@ Cuatro=(
     (['SELECT', "Selecciona y muestra los atributos y opciones",    'T_SELECT'])  
 )
 CincoOchoNueve=(
-    (['REGEX',  "", 'T_REGEX'])
+    (['REGEX',  "", 'T_REGEX']),
     (['=',  "Iguala un Atributo con una opcion",    'T_IGUAL']),    
     (['<',  "Sirve para ver si un valor es menor",  'T_<']),    
     (['>',  "Sirve para ver si un valor es mayor",  'T_>']),    
@@ -47,4 +47,16 @@ Siete=(
 
 def token(matriz):
     for id in range(len(matriz)):
-        matriz[id]
+        #matriz[id][0],  matriz[id][1], matriz[id][2], matriz[id][3], matriz[id][4], matriz[id][5], matriz[id][6], matriz[id][7], matriz[id][8], matriz[id][9]
+        for a in range(len(Uno)):
+            if Uno[a][0]==matriz[id][0]:
+                print(Uno[a][0])
+                print('||',Uno[id][0],'||',Uno[id][1],'||',Uno[id][2],'||')
+        
+        for a in range(len(Dos)):
+            if Dos[a][0]==matriz[id][1]:
+                print(Dos[a][0])
+                print('||',Dos[id][0],'||',Dos[id][1],'||',Dos[id][2],'||')
+            else:
+
+        #print(matriz[id][0],  matriz[id][1], matriz[id][2], matriz[id][3], matriz[id][4], matriz[id][5], matriz[id][6], matriz[id][7], matriz[id][8], matriz[id][9])
