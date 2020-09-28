@@ -1,17 +1,17 @@
 (
     <
-        [atributo_numerico] = 1,
-        [atributo_cadena] = "sip",
-        [atributo_booleano] = true
+        [aa] = 1.0,
+        [bb] = "sip",
+        [cc] = true
     >,
     <
         [aa] = 95.7,
         [bb] = "nel xd",
-        [atributo_booleano] = false
+        [cc] = false
     >,
     <
-        [atributo_numerico] = -56.4,
-        [atributo_cadena] = "este es otro ejemplo, las cadenas pueden ser muy largas",
-        [atributo_booleano] = false
+        [aa] = -56.4,
+        [bb] = "este es otro ejemplo, las cadenas pueden ser muy largas",
+        [cc] = false
     >
 )

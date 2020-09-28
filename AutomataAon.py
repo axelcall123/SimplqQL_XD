@@ -270,7 +270,7 @@ def SeparacionAutomata(NombreAon):
             if nueva_cadena[i]==")":
                  #print("|T_()Fin|.11", nueva_cadena[i],"")
                  if nueva_cadena[i:len(nueva_cadena)]==")@$#$@":
-                     print("Fin")
+                     #print("Fin")
                      AtriOp.append(["*END","FIN*",-100])
                      break
                  else:
