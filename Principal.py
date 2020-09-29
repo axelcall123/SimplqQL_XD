@@ -8,7 +8,7 @@ SetIdUse=[]#USE SET a 0
 ParaUse=[]#MATRIZ DE ||a||archivo.aon||
 Opc1AndOrXor=[]#A=..
 Opc2AndOrXor=[]#B=..
-KeyCommand=[]
+TOken=[]
 #MatrizAon.apend
 #my_path = os.path.abspath(os.path.dirname(__file__))
 #Archivos=open(os.path.join(my_path, "../SimplqQL_XD/Comando.py"),"r")
@@ -91,7 +91,9 @@ def AndOrXor():
 while salir==True:
     AonAtriOp=[]
     comando=input()
-    matrizComandos=FiltroComandos.FiltroCom(comando)
+    ayudas=FiltroComandos.FiltroCom(comando)
+    matrizComandos=ayuda[0]
+    TOken.append(ayuda[1])
     if matrizComandos[0]=='CREATE':
         if matrizComandos[1]=='SET':
             SetIdLoad.append(matrizComandos[2])#crea:SET>>elementos
@@ -238,7 +240,6 @@ while salir==True:
 #---------------------------------------------------------------------------
     elif matrizComandos[0]=='REPORT':
         if matrizComandos[1]=='TOKENS':
-            Tokens.token(KeyCommand)
             print()
 #---------------------------------------------------------------------------
 #---------------------------------------------------------------------------
@@ -250,8 +251,6 @@ while salir==True:
 #---------------------------------------------------------------------------
     else:
         print("Parece que algo esta mal :'c")
-
-    KeyCommand.append(matrizComandos)
     #print(SetIdUse, "usar:elementos") #TODO: MENSAJE
     #print(SetIdLoad, "load:elementos") #TODO: MENSAJE
     #print(ParaUse, "vamos a ver el error") #TODO: MENSAJE

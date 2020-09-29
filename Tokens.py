@@ -23,7 +23,7 @@ Dos=(
 )
 TresSeis=(
     (['WHERE',  "Permite seleccionar una condicion",    'T_WHERE'])
-)
+)            
 Cuatro=(
     (['FILES',  "", 'T_FILES']),
     (['COUNT',  "Permite contar el numero de registros", 'T_COUNT']),
@@ -44,19 +44,29 @@ Siete=(
     (['OR', "Agregar una condicion con Or(o)",  'T_OR']),   
     (['XOR',    "", 'T_XOR'])
 )
+import SepComa
 
-def token(matriz):
+
+def token(matriz):   
     for id in range(len(matriz)):
-        #matriz[id][0],  matriz[id][1], matriz[id][2], matriz[id][3], matriz[id][4], matriz[id][5], matriz[id][6], matriz[id][7], matriz[id][8], matriz[id][9]
-        for a in range(len(Uno)):
-            if Uno[a][0]==matriz[id][0]:
-                print(Uno[a][0])
-                print('||',Uno[id][0],'||',Uno[id][1],'||',Uno[id][2],'||')
-        
-        for a in range(len(Dos)):
-            if Dos[a][0]==matriz[id][1]:
-                print(Dos[a][0])
-                print('||',Dos[id][0],'||',Dos[id][1],'||',Dos[id][2],'||')
-            else:
-
-        #print(matriz[id][0],  matriz[id][1], matriz[id][2], matriz[id][3], matriz[id][4], matriz[id][5], matriz[id][6], matriz[id][7], matriz[id][8], matriz[id][9])
+               
+        for a in range(len(Siete)):
+            if matriz[id][6]!=" ":
+                if Siete[a][0]==matriz[id][6]:
+                    Token.append(Siete[a][0],Siete[a][1],Siete[a][2])
+                    print('||',Siete[a][0],'||',Siete[a][1],'||',Siete[a][2],'||')
+                else:
+                   print('||',matriz[id][2],'||',"Nombre del atributo elegido",'||',"T_ATRIBUTO",'||')
+#------------------------------------------------------------------------------------               
+        for a in range(len(CincoOchoNueve)):
+            if matriz[id][7]!=" ":
+                if CincoOchoNueve[a][0]==matriz[id][7]:
+                    Token.append(CincoOchoNueve[a][0],CincoOchoNueve[a][1],CincoOchoNueve[a][2])
+                    print('||',CincoOchoNueve[a][0],'||',CincoOchoNueve[a][1],'||',CincoOchoNueve[a][2],'||')
+                else:
+                    print('||',matriz[id][2],'||',"Nombre del atributo elegido",'||',"T_ATRIBUTO",'||')
+        for a in range(len(CincoOchoNueve)):
+            if matriz[id][8]!=" ":
+                if CincoOchoNueve[a][0]==matriz[id][8]:
+                    Token.append(CincoOchoNueve[a][0],CincoOchoNueve[a][1],CincoOchoNueve[a][2])
+                    print('||',CincoOchoNueve[a][0],'||',CincoOchoNueve[a][1],'||',CincoOchoNueve[a][2],'||')
