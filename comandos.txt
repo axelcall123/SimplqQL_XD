@@ -1,10 +1,14 @@
-CREATE SET 1a
-LOAD INTO 1a FILES 1.aon, 2.aon
-USE SET 1a
+CREATE SET aa
+LOAD INTO aa FILES a.aon, b.aon
+USE SET aa
 ----
 SELECT *
 SELECT * WHERE aa = 1 AND cc = true
-#LIST ATTRIBUTES
+SELECT * WHERE aa = 2 OR cc = true    |F|T|
+SELECT * WHERE aa = 1 OR cc = kk   |T|F|
+SELECT aa, bb
+#-------------------
 MAX bb
 SUM aa, bb, cc
-      
+COUNT *
+COUNT aa, bb, cc

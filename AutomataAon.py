@@ -117,13 +117,13 @@ def SeparacionAutomata(NombreAon):
                 a=1
                 #print("|T_=|.4",nueva_cadena[i],"")
             if nueva_cadena[i+1]==" ":
-                if ord(nueva_cadena[i+2])>=48 and ord(nueva_cadena[i+2])<=57:
+                if ord(nueva_cadena[i+2])>=48 and ord(nueva_cadena[i+2])<=57:#NUMERO
                     state=8
-                elif nueva_cadena[i+2]=="+" or nueva_cadena[i+2]=="-":
+                elif nueva_cadena[i+2]=="+" or nueva_cadena[i+2]=="-":#SINGOS DEL NUMERO
                     state=8
                 elif nueva_cadena[i+2]=='"':
                     state=11
-                elif ord(nueva_cadena[i+2])>=97 and ord(nueva_cadena[i+2])<=122:
+                elif ord(nueva_cadena[i+2])>=97 and ord(nueva_cadena[i+2])<=122:#LETRAS MINUSCULA
                     state=16
                 else:
                     print("Error:7.1",nueva_cadena[i],"pos",i)
@@ -211,7 +211,7 @@ def SeparacionAutomata(NombreAon):
             elif nueva_cadena[i]=='"':
                 #print("|T_Palabra|.13",palabrad,"")
                 AtriOp.append([Atributo,palabrad,subb])
-                
+
                 #print('|T_""Final|.13',nueva_cadena[i],"")
                 palabrad=''
                 state=15

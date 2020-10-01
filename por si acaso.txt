@@ -1,29 +1,126 @@
-#FILTRAR COMANDOS 3 todo: eliminar condicion solo es texto
-    for id in comandoTer:
-        if id==sep_palabras_es[2]:# IGUAL COMANDO POS 3
-            matrizComandos.append(id)
-            break
-        else:
-            matrizComandos.append(sep_palabras_es[2])
-            break
-            print()
+  #FILTRAR COMANDOS 1
+  for id in range(len(Uno)):
+      if Uno[id][0]==sep_palabras_es[0]:
+          matrizComandos.append(sep_palabras_es[0])
+          #Token.append([Uno[id][0],Uno[id][1],Uno[id][2]])#TOKEN
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #FILTRAR COMANDOS 2
+  comandoTexto=''
+  for id in range(len(Dos)):
+      if Dos[id][0]==sep_palabras_es[1]:#IGUAL COMANDO POS 2
+          matrizComandos.append(sep_palabras_es[1])
+          #Token.append([Dos[id][0],Dos[id][1],Dos[id][2]])#TOKEN
+          break
+      else:#AUTOMATA aaa, aaa, aaa || aaa
+          #if sep_palabras_es[1]!=' ' and sep_palabras_es[1]!='':
+          MatrizAyuda=AutomataComas.sepComas(sep_palabras_es[1:])
+          matrizComandos.append(MatrizAyuda[0])
+          Palabra=SepComa.Coma(MatrizAyuda[0])#PARA VER EL PALABRA TOKEN
+           #for z in Palabra:
+            #   PalabraExtension(z)
 
-            #FILTRAR COMANDOS 4 todo: eliminar condicion solo es texto
-               for id in comandoCuar:
-                   if id==sep_palabras_es[3]:# IGUAL COMANDO POS 4
-                       matrizComandos.append(id)
-                       break
-                   else:
-                       matrizComandos.append(sep_palabras_es[3])
-                       break
-                       print()
-                
-                
-                
-                       #FILTRAR COMANDOS 7
-                           for id in comandoCon:
-                               if id==sep_palabras_es[6]:# IGUAL COMANDO POS 5
-                                   matrizComandos.append(id)
-                               else:
-                                   matrizComandos.append(id)
-                                   break
+          for id in range(int(MatrizAyuda[1])):#QUITA LAS POSICIONES PARA QUE EL COMANDO QUEDE POS 3
+              sep_palabras_es.pop(0)
+              #print(sep_palabras_es, "POP")
+              break
+
+  for id in range(15-len(sep_palabras_es)):#EVITAR bug matriz pequeña
+      sep_palabras_es.append(" ")
+  #print(sep_palabras_es, "AÑADIDO")
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #FILTRAR COMANDOS 3
+  matrizComandos.append(sep_palabras_es[2])
+  if sep_palabras_es[2]=='WHERE':
+      Token.append(['WHERE',"Permite seleccionar una condicion",'T_WHERE'])
+  else:
+      if sep_palabras_es[2]!=' ' and sep_palabras_es[2]!='':
+          Token.append([[sep_palabras_es[2],"Nombre del atributo elegido","T_ATRIBUTO"]])
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #FILTRAR COMANDOS 4 todo: eliminar condicion solo es texto
+  matrizComandos.append(sep_palabras_es[3])
+  for id in range(len(Cuatro)):
+      if Cuatro[id][0]==sep_palabras_es[3]:
+         Token.append([Cuatro[id][0],Cuatro[id][1],Cuatro[id][2]])
+      else:
+          if sep_palabras_es[3]!=' ' and sep_palabras_es[3]!='':
+              Token.append([sep_palabras_es[3],"Nombre del atributo elegido","T_ATRIBUTO"])
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #FILTRAR COMANDOS 5
+  for id in range(len(CincoOchoNueve)):
+      if CincoOchoNueve[id][0]==sep_palabras_es[4]:# IGUAL COMANDO POS 5
+          matrizComandos.append(sep_palabras_es[4])
+          Token.append([CincoOchoNueve[id][0],CincoOchoNueve[id][1],CincoOchoNueve[id][2]])
+          break
+      elif sep_palabras_es[4]!=' ' and sep_palabras_es[4]!='':
+          MatrizAyuda=AutomataComas.sepComas(sep_palabras_es[4:])
+          matrizComandos.append(MatrizAyuda[0])
+          Palabra=SepComa.Coma(MatrizAyuda[0])#PARA VER EL PALABRA TOKEN
+          for z in Palabra:
+             PalabraExtension(z)
+
+          for id in range(int(MatrizAyuda[1])):#QUITA LAS POSICIONES PARA QUE EL COMANDO QUEDE POS 3
+              sep_palabras_es.pop(0)
+          #break change
+          pass
+  for id in range(15-len(sep_palabras_es)):#EVITAR bug matriz pequeña
+      sep_palabras_es.append(" ")
+  #print(sep_palabras_es, "AÑADIDO")
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #FILTRAR COMANDOS 6
+  matrizComandos.append(sep_palabras_es[5])
+  if sep_palabras_es[5]=='WHERE':
+      Token.append(['WHERE',"Permite seleccionar una condicion",'T_WHERE'])
+  else:
+      if sep_palabras_es[5]!=' ' and sep_palabras_es[5]!='':
+          if sep_palabras_es[5][0]=='[':
+              Token.append([[sep_palabras_es[5],"Nombre de la busqueda regex","T_OpReg"]])
+          else:
+              Token.append([[sep_palabras_es[5],"Nombre de la opcion elegida","T_Opcion"]])
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #FILTRAR COMANDOS 7
+  matrizComandos.append(sep_palabras_es[6])
+  for id in range(len(Siete)):
+      if sep_palabras_es[6]!=" " and sep_palabras_es[6]!="":
+          if Siete[id][0]==sep_palabras_es[6]:
+              Token.append(Siete[id][0],Siete[id][1],Siete[id][2])
+          else:
+              Token.append([sep_palabras_es[6],"Nombre del atributo elegido","T_ATRIBUTO"])
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #FILTRAR COMANDOS 8
+  matrizComandos.append(sep_palabras_es[7])
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #FILTRAR COMANDOS 9
+  for id in comandoCin:
+      if id==sep_palabras_es[8]:# IGUAL COMANDO POS 5
+          matrizComandos.append(id)
+          break
+      else:
+          matrizComandos.append(sep_palabras_es[8])
+          break
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #---------------------------------------------------------------------------
+  #FILTRAR COMANDOS 10
+  matrizComandos.append(sep_palabras_es[9])
+  if sep_palabras_es[9]!=" " and sep_palabras_es[9]!='':
+      Token.append([sep_palabras_es[6],"Nombre del atributo elegido","T_ATRIBUTO"])
+
+      print(Token, "token")
+  print(matrizComandos, "COMANDO EVALUAR")# TODO: MENSAJE
+  return ([matrizComandos,Token])
