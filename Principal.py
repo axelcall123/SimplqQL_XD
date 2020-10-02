@@ -1,4 +1,4 @@
-import Comando, AutomataAon, os, Tokens, webbrowser
+import  Comando, AutomataAon, os, Tokens, webbrowser
 import FiltroComandos#SEPARAR LOS COMANDOS LOAD INTO elementos FILES periodica.aon, periodica2.aon
 import SepComa#OBTIENE 1.AON 2.AON
 salir=True
