@@ -1,4 +1,4 @@
-import  Comando, AutomataAon, os, Tokens, webbrowser
+import  Comando, AutomataAon, os, Tokens, webbrowser, regex
 import FiltroComandos#SEPARAR LOS COMANDOS LOAD INTO elementos FILES periodica.aon, periodica2.aon
 import SepComa#OBTIENE 1.AON 2.AON
 salir=True
@@ -168,17 +168,21 @@ def principal():
                     for a in range(len(AonAtriOp)):#CICLO FOR PARA LOS ATRIBUTOS Y ARCHIVOS
                         for b in range(len(AonAtriOp[a])):
                             print(AonAtriOp[a][b][0],"=",AonAtriOp[a][b][1])
-                elif matrizComandos[2]=='WHERE':
-
+                elif matrizComandos[2]=='WHERE':#SELEC * WHERE
+                    
                     if matrizComandos[6]==" ":
                         AonAtriOp=AutomataAon.CicloAon(SetIdUse,ParaUse)#COMPARACION,MATRIZ||atributo,[1.aon,2.aon]||
                         for a in range(len(AonAtriOp)):#CICLO FOR PARA LOS ATRIBUTOS Y ARCHIVOS
-                            for b in range(len(AonAtriOp[a])):#A=6
+                            for b in range(len(AonAtriOp[a])):#A            =                   6
                                 if (matrizComandos[3]==AonAtriOp[a][b][0] and matrizComandos[5]==AonAtriOp[a][b][1]) and matrizComandos[4]=="=":
                                     #print(AonAtriOp[a][b][0],"=",AonAtriOp[a][b][1])
                                     num=AigualB(a,AonAtriOp[a][b][2])
                                     PrintArhc(num[0],num[1])
                                     break
+                                elif matrizComandos[3]==AonAtriOp[a][b][0] and matrizComandos[4]=="REGEX":
+                                    #regex.reg(matrizComandos[5],)
+                                    #print(matrizComandos[5],matrizComandos[4])
+                                    regex.espa(matrizComandos[5],AonAtriOp[a][b][1])
                     # OBTIENE LOS ARCHIVO Y SUB ARCHIVOS PARA VER SI ESTAN EN LA MISMA POSICION
                     elif matrizComandos[6]=="AND":
                         num=AndOrXor()
@@ -216,7 +220,9 @@ def principal():
                             for b in range(len(AonAtriOp[a])):
                                 if id==AonAtriOp[a][b][0]:
                                     print(AonAtriOp[a][b][0],'=',AonAtriOp[a][b][1])
-
+                                elif matrizComandos[3]==AonAtriOp[a][b][0] and matrizComandos[4]=="REGEX":
+                                    #print(matrizComandos[5],matrizComandos[4])
+                                    regex.espa(matrizComandos[5],AonAtriOp[a][b][1])
                 if matrizComandos[2]=='WHERE':
                     if matrizComandos[6]==" ":
                         AonAtriOp=AutomataAon.CicloAon(SetIdUse,ParaUse)#COMPARACION,MATRIZ||atributo,[1.aon,2.aon]||

@@ -1,17 +1,17 @@
-def AutomataFor(T,A):#AUTOMATA ||TEXTO EVALUADO AUTOMATA
-    for id in range(len(T)):
-        if T[id]==A[id]:#SI SON IGUALES LAS POSCIONES a=a
-            if (len(T)-1)==id:#SI LLEGA EN LA ULTIMA POSICION
-                print(A,'^ PARENTESIS')
-        elif T[id]=='.'  and A[id]!='':
-            if (len(T)-1)==id:#SI LLEGA EN LA ULTIMA POSICION
-                print(A,'^ PARENTESIS')
+def AutomataFor(T,TR,A):#TEXTO EVALUADO AUTOMATA||AUTOMATA
+    for id in range(len(A)):
+        if A[id]==T[id]:#SI SON IGUALES LAS POSCIONES a=a
+            if (len(A)-1)==id:#SI LLEGA EN LA ULTIMA POSICION
+                print(TR,'^ PARENAESIS')
+        elif A[id]=='.'  and A[id]!='':
+            if (len(A)-1)==id:#SI LLEGA EN LA ULTIMA POSICION
+                print(TR,'^ PARENAESIS')
             continue
         else:#a=B
             #print('Nop')
             break
 
-def regresion(T,C,V1,V2):#TEXTO|CONDICION|VECES LIM IN|VECES LIM SUP
+def regresion(T,TR,C,V1,V2):#TEXTO|CONDICION|VECES LIM IN|VECES LIM SUP
     #unir=''#.+|*|?
     con=0
     for id in range(len(T)):
@@ -27,11 +27,11 @@ def regresion(T,C,V1,V2):#TEXTO|CONDICION|VECES LIM IN|VECES LIM SUP
             continue
 
     if V1<=con and V2>=con:# SI APARECE N VECES HASTA M VECES
-        print(T,con," +*?")
+        print(TR,con," +*?")
     else:
         print('No Tiene Los Requisitos')
 
-def regresionFor(T,C,V1,V2):#TEXTO|CONDICION|VALOR1|VALOR2
+def regresionFor(T,TR,C,V1,V2):#TEXTO|CONDICION|VALOR1|VALOR2
     union=''#(abc)+|*|?
     con=0
     pa=''#PALABRA O TEXTO DE LA CONDICION FILTRADA
@@ -66,11 +66,11 @@ def regresionFor(T,C,V1,V2):#TEXTO|CONDICION|VALOR1|VALOR2
                         break#TERMINA
 
     if V1<=con and V2>=con:# SI APARECE N VECES HASTA M VECES
-        print(T,con," +*?")
+        print(TR,con," +*?")
     else:
         print('No Tiene Los Requisitos')         
 
-def reg(R,T):#EVALUACION REGEX|TEXTO EVALUADO
+def reg(R,T,TR):#EVALUACION REGEX|TEXTO EVALUADO
     unir=''
     Reg=''
     OpcioOr=[]
@@ -104,29 +104,42 @@ def reg(R,T):#EVALUACION REGEX|TEXTO EVALUADO
                         unir=''
                     else:
                         unir=unir+z[a]
-                AutomataFor(paren,T)#TEXTO EVALUADO| AUTOMATA(si parece primero(ab))
+                AutomataFor(T,TR,paren)#TEXTO EVALUADO| AUTOMATA(si parece primero(ab))
             elif z[1]==T[0]:#a^ SI ES LA PRIMEAR LETRA a
-                print(T,'^ TEXTO')
+                print(TR,'^ TEXTO')
             elif z[1]=='.' and z[1]!='':#PUNTO CUALQUIERA
-                print(T,'^ TEXTO')
+                print(TR,'^ TEXTO')
 
         elif z[len(z)-1]=='+':
             if z[len(z)-2]==')':
-                regresionFor(T,z,1,10000)
+                regresionFor(T,TR,z,1,10000)
             else:
-                regresion(T,z[len(z)-2],1,10000)
+                regresion(T,TR,z[len(z)-2],1,10000)
 
         elif z[len(z)-1]=='*':
             if z[len(z)-2]==')':
-                regresionFor(T,z,0,10000)
+                regresionFor(T,TR,z,0,10000)
             else:
-                regresion(T,z[len(z)-2],0,10000)
+                regresion(T,TR,z[len(z)-2],0,10000)
 
         elif z[len(z)-1]=='?':
             if z[len(z)-2]==')':
-                regresionFor(T,z,0,1)
+                regresionFor(T,TR,z,0,1)
             else:
-                regresion(T,z[len(z)-2],0,1)
-#reg('[(JE)?]','JE')
+                regresion(T,TR,z[len(z)-2],0,1)
+
+def espa(AUTOMATA,TEXTO):
+    unir=''
+    for i in TEXTO:
+        if i==' ':
+            continue
+        else:
+            unir=unir+i
+
+    reg(AUTOMATA,unir,TEXTO)
+#reg('[(JE)?|^a|^(ho)]','JE')
 #regresion('holat','t',1)
 #regresionFor('abababa','(ab)+',0,0)
+#AutomataFor('abcde','ab cd e','ab',)
+#espa('HOLA MUNDO COMO LE VA')
+#reg('[a?]','nel','ne l')

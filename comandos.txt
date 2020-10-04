@@ -12,3 +12,5 @@ MAX bb
 SUM aa, bb, cc
 COUNT *
 COUNT aa, bb, cc
+#----------
+SELECT * WHERE aa REGEX [(JE)?|^a|^(ho)]
