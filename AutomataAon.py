@@ -88,7 +88,7 @@ def SeparacionAutomata(NombreAon):
             elif nueva_cadena[i]=="]":
                 #print("|T_Atributo|.5",palabrad,"")
                 Atributo=palabrad
-                 #print("|T_[]Fin|.5",nueva_cadena[i],"")
+                #print("|T_[]Fin|.5",nueva_cadena[i],"")
                 palabrad=''
                 state=2
             elif nueva_cadena[i]=="_":
