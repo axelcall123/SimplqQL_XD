@@ -44,10 +44,21 @@ def PalabraExtension(Palabra):
                 print('||',float(unir),'||',"Nombre del atributo elegido",'||',"T_ATRIBUTO",'||')
                 unir=''
                 return
+#PalabraExtension(textos)
+text="""CREATE SET aa;LOAD INTO aa FILES a.aon, b.aon;USE SET aa"""
+Comand=[]
 
-PalabraExtension(textos)
+def xd(text):
+    unir=''
+    text=text+'; '
+    for i in text:
+        if i==';':
+            Comand.append(unir)
+            unir=''
+        else:
+            unir=unir+i
+    print(Comand,'comandos')
 
-
-
+xd(text)
 
                 

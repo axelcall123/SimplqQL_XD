@@ -9,7 +9,8 @@ def CicloAon(comparacion,MatrizUrl):
     for id in range(len(MatrizUrl)):
         if comparacion==MatrizUrl[id][0]:#OBTIENE COMPARA ||SET>>elementoss||
             ayuda=automata(MatrizUrl[id][1])#OBTIENE || ||ARHCIVO||
-    return ayuda
+    #print(ayuda,'ver la matriz perrona')
+            return ayuda
 
 def automata(MatrizEx):#OBTIENE 1.AON 2.AON SEPARADO
     ayuda=[]

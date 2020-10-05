@@ -1,3 +1,5 @@
+SCRIPT u.siql
+-----
 CREATE SET aa
 LOAD INTO aa FILES a.aon, b.aon
 USE SET aa
@@ -14,3 +16,11 @@ COUNT *
 COUNT aa, bb, cc
 #----------
 SELECT * WHERE aa REGEX [(JE)?|^a|^(ho)]
+
+
+        ##AonAtriOp=[]
+        ##comando=input()
+        ##ayudas=FiltroComandos.FiltroCom(comando)
+        ##matrizComandos=ayudas[0]
+        #matrizComandos=FiltroComandos.FiltroCom(comando)
+        ##TOken.append(ayudas[1])

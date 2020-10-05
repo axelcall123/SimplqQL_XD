@@ -7,8 +7,9 @@ SetIdLoad=[]#CREATE SET a apend
 SetIdUse=[]#USE SET a 0
 ParaUse=[]#MATRIZ DE ||a||archivo.aon||
 TOken=[]
+SCRIPT=[]
 #MatrizAon.apend
-#my_path = os.path.abspath(os.path.dirname(__file__))
+my_path = os.path.abspath(os.path.dirname(__file__))
 #Archivos=open(os.path.join(my_path, "../SimplqQL_XD/Comando.py"),"r")
 #print(Archivos.read())
 #Archivos.close()
@@ -28,6 +29,9 @@ IMPRIME:
 ||ATRICBUTO||OPCION||1
 ||ATRICBUTO||OPCION||2
 '''
+
+
+
 def AndOrXor():
     num1=[]
     num2=[]
@@ -65,6 +69,7 @@ def PrintArhcD(uno,dos):#IMPRIME CON LA CONDICON SELECT 1,2,34
 #////////////////////////////////////////////////
 def AigualB(uno,dos):#OBTENGO LA SUBCARPETA Y EL NUMERO DEL ARCHIVO
     AonAtriOp=AutomataAon.CicloAon(SetIdUse,ParaUse)
+    print(AonAtriOp,'noooooo')
     for b in range(len(AonAtriOp[uno])):#RETORNA EL ARCHIVO|SUB-ARCHIVO
         if dos==AonAtriOp[uno][b][2]:
             return ([uno,dos])
@@ -118,13 +123,40 @@ def html(num):
         #print(TOken[num][b][0],TOken[num][b][1],TOken[num][b][2])
         texto=texto+div +doce+'REPORTE  '+str(b+1)+close+ tres+TOken[num][b][0]+close+    tres+TOken[num][b][1]+close+    tres+TOken[num][b][2]+close+    close+close   
     return texto
-def principal():
-    while salir==True:
+
+#def principal():
+while salir==True:
+    SCRIPT.clear()
+    Unir=''
+    FF=input()
+    #comando=input()
+    a=FF
+    b=FiltroComandos.FiltroCom(a)
+    if b[0][0]=='SCRIPT':
+        TOken.append(b[1])
+        ex=SepComa.Coma(b[0][1])
+        for i in ex:
+                Ar=open(os.path.join(my_path, "../SimplqQL_XD/QL/"+i),"r")
+                Text=Ar.read()
+                Text=Text+'; '
+                for i in Text:
+                    if i==';':
+                        #principal(Unir)
+                        SCRIPT.append(Unir)
+                        Unir=''
+                    else:
+                        Unir=Unir+i
+                Ar.close()
+    else:
+        SCRIPT.append(FF)
+            #principal(FF)
+        
+
+    print(SCRIPT)
+    for comando in SCRIPT:
         AonAtriOp=[]
-        comando=input()
         ayudas=FiltroComandos.FiltroCom(comando)
         matrizComandos=ayudas[0]
-        #matrizComandos=FiltroComandos.FiltroCom(comando)
         TOken.append(ayudas[1])
         if matrizComandos[0]=='CREATE':
             if matrizComandos[1]=='SET':
@@ -164,6 +196,7 @@ def principal():
                     #print(AonAtriOp[0])#ARCHIVO 1,n
                     #print(AonAtriOp[0][0])#||ATRIBUTO||OPCION|| 1,n
                     #print(AonAtriOp[0][0][0])#||ATRIBUTO|| aa_aa
+                    print(SetIdUse,ParaUse,'xd')
                     AonAtriOp=AutomataAon.CicloAon(SetIdUse,ParaUse)#COMPARACION,MATRIZ||atributo,[1.aon,2.aon]||
                     for a in range(len(AonAtriOp)):#CICLO FOR PARA LOS ATRIBUTOS Y ARCHIVOS
                         for b in range(len(AonAtriOp[a])):
@@ -176,6 +209,7 @@ def principal():
                             for b in range(len(AonAtriOp[a])):#A            =                   6
                                 if (matrizComandos[3]==AonAtriOp[a][b][0] and matrizComandos[5]==AonAtriOp[a][b][1]) and matrizComandos[4]=="=":
                                     #print(AonAtriOp[a][b][0],"=",AonAtriOp[a][b][1])
+
                                     num=AigualB(a,AonAtriOp[a][b][2])
                                     PrintArhc(num[0],num[1])
                                     break
@@ -385,7 +419,7 @@ def principal():
                     webbrowser.open_new_tab('reporte'+str(a+1)+'.html')#GENERAR  
     #---------------------------------------------------------------------------
     #---------------------------------------------------------------------------
-    #---------------------------------------------------------------------------
+    #---------------------------------------------------------------------------        
         else:
             print("Parece que algo esta mal :'c")
         #print(SetIdUse, "usar:elementos") #TODO: MENSAJE
@@ -393,4 +427,37 @@ def principal():
         #print(ParaUse, "vamos a ver el error") #TODO: MENSAJE
         #print(ParaUse, "ayuda, xd") #TODO: MENSAJE
 
+def SCRIPT():
+    #Comando.hola()
+    while salir==True:
+        my_path = os.path.abspath(os.path.dirname(__file__))
+        #Archivos=open(os.path.join(my_path, "../SimplqQL_XD/Comando.py"),"r")
+        #print(Archivos.read())
+        #Archivos.close()
+        #AonAtriOp=[]
+        Unir=''
+        FF=input()
+        a=FF
+        b=FiltroComandos.FiltroCom(a)
+        if b[0][0]=='SCRIPT':
+            #print(b[0][0],b[0][1],'::')
+            TOken.append(b[1])
+            ex=SepComa.Coma(b[0][1])
+            for i in ex:
+                Ar=open(os.path.join(my_path, "../SimplqQL_XD/QL/"+i),"r")
+                Text=Ar.read()
+                Text=Text+'; '
+                for i in Text:
+                    if i==';':
+                        principal(Unir)
+                        print(Unir)
+                        Unir=''
+                    else:
+                        Unir=Unir+i
+        else:
+            principal(FF)
+        Ar.close()
 principal()
+
+
+#SCRIPT()
